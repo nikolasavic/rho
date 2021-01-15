@@ -16,5 +16,10 @@ void print_bitboard(U64 bitboard) {
 }
 
 int pop_count(U64 bb) {
-  return 0;
+  int count;
+
+  for(count = 0; bb; bb >>= 1) {
+    count += bb & 1;
+  }
+  return count;
 }
