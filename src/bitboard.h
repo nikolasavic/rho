@@ -5,3 +5,5 @@
 #define pop_bit(square, bitboard) ((bitboard & (1ULL << square)) ? 1 : 0)
 
 void print_bitboard(U64 bb);
+
+int pop_count(U64 bb);
