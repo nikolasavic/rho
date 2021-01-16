@@ -13,6 +13,7 @@ void print_bitboard(U64 bitboard) {
     printf("\n");
   }
   printf("\n   a b c d e f g h\n");
+  printf("U64: %llu\n\n", bitboard);
 }
 
 int pop_count(U64 bb) {
