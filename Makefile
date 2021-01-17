@@ -11,5 +11,10 @@ test_bitboard:
 	gcc test/test_bitboard.c src/bitboard.c unity/unity.c -o build/test/test_bitboard
 	./build/test/test_bitboard
 
+test_masks:
+	mkdir -p build/test
+	gcc test/test_masks.c src/bitboard.c src/masks.c unity/unity.c -o build/test/test_masks
+	./build/test/test_masks
+
 clean:
 	rm -rf build/*
