@@ -1,8 +1,8 @@
 #include "masks.h"
 #include "bitboard.h"
 
-const U64 a_file = 72340172838076673ULL;
-const U64 h_file = 9259542123273814144ULL;
+const U64 A_FILE = 72340172838076673ULL;
+const U64 H_FILE = 9259542123273814144ULL;
 
 U64 pawn_attack_mask(square, side) {
   U64 bb = 0ULL;
@@ -11,18 +11,18 @@ U64 pawn_attack_mask(square, side) {
     return bb;
 
   if(side == WHITE) {
-    if((1ULL << square) & a_file) {
+    if(get_bit(square, A_FILE)) {
       set_bit((square - 7), bb);
-    } else if((1ULL << square) & h_file) {
+    } else if(get_bit(square, H_FILE)) {
       set_bit((square - 9), bb);
     } else {
       set_bit((square - 7), bb);
       set_bit((square - 9), bb);
     }
   } else {
-    if((1ULL << square) & a_file) {
+    if(get_bit(square, A_FILE)) {
       set_bit((square + 9), bb);
-    } else if((1ULL << square) & h_file) {
+    } else if(get_bit(square, H_FILE)) {
       set_bit((square + 7), bb);
     } else {
       set_bit((square + 9), bb);
