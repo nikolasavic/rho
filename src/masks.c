@@ -59,3 +59,18 @@ U64 pawn_motion_mask(square, side) {
 
   return bb;
 }
+
+U64 king_attack_mask(square) {
+  U64 bb = 0ULL;
+
+  set_bit((square - 7), bb);
+  set_bit((square - 8), bb);
+  set_bit((square - 9), bb);
+  set_bit((square - 1), bb);
+  set_bit((square + 1), bb);
+  set_bit((square + 7), bb);
+  set_bit((square + 8), bb);
+  set_bit((square + 9), bb);
+
+  return bb;
+}

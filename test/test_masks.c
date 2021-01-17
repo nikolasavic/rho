@@ -94,9 +94,25 @@ void test_pawn_motion_mask(void) {
   TEST_ASSERT_EQUAL_INT(0ULL, pawn_motion_mask(H8, BLACK));
 }
 
+void test_king_attack_mask(void) {
+  U64 expected;
+
+  expected = 0ULL;
+  set_bit(E3, expected);
+  set_bit(F3, expected);
+  set_bit(G3, expected);
+  set_bit(E2, expected);
+  set_bit(G2, expected);
+  set_bit(E1, expected);
+  set_bit(F1, expected);
+  set_bit(G1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(F2));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_pawn_attack_mask);
   RUN_TEST(test_pawn_motion_mask);
+  RUN_TEST(test_king_attack_mask);
   return UNITY_END();
 }
