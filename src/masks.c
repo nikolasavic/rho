@@ -75,3 +75,16 @@ U64 king_attack_mask(square) {
 
   return bb;
 }
+
+U64 knight_attack_mask(square) {
+  U64 bb = 0ULL;
+  set_bit((square - 15), bb);
+  set_bit((square - 17), bb);
+  set_bit((square - 6), bb);
+  set_bit((square - 10), bb);
+  set_bit((square + 6), bb);
+  set_bit((square + 10), bb);
+  set_bit((square + 15), bb);
+  set_bit((square + 17), bb);
+  return bb;
+}

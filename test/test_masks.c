@@ -165,10 +165,27 @@ void test_king_attack_mask(void) {
   TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(A1));
 }
 
+void test_knight_attack_mask(void) {
+  U64 expected;
+
+  expected = 0ULL;
+  set_bit(A2, expected);
+  set_bit(A4, expected);
+  set_bit(B1, expected);
+  set_bit(B5, expected);
+  set_bit(D5, expected);
+  set_bit(D1, expected);
+  set_bit(E2, expected);
+  set_bit(E4, expected);
+  print_bitboard(knight_attack_mask(C3));
+  TEST_ASSERT_EQUAL_INT(expected, knight_attack_mask(C3));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_pawn_attack_mask);
   RUN_TEST(test_pawn_motion_mask);
   RUN_TEST(test_king_attack_mask);
+  RUN_TEST(test_knight_attack_mask);
   return UNITY_END();
 }
