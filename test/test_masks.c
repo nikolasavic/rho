@@ -107,6 +107,62 @@ void test_king_attack_mask(void) {
   set_bit(F1, expected);
   set_bit(G1, expected);
   TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(F2));
+
+  expected = 0ULL;
+  set_bit(D2, expected);
+  set_bit(E2, expected);
+  set_bit(F2, expected);
+  set_bit(D1, expected);
+  set_bit(F1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(E1));
+
+  expected = 0ULL;
+  set_bit(H2, expected);
+  set_bit(G2, expected);
+  set_bit(G1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(H1));
+
+  expected = 0ULL;
+  set_bit(H6, expected);
+  set_bit(G6, expected);
+  set_bit(G5, expected);
+  set_bit(G4, expected);
+  set_bit(H4, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(H5));
+
+  expected = 0ULL;
+  set_bit(H7, expected);
+  set_bit(G8, expected);
+  set_bit(G7, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(H8));
+
+  expected = 0ULL;
+  set_bit(C7, expected);
+  set_bit(B8, expected);
+  set_bit(B7, expected);
+  set_bit(D8, expected);
+  set_bit(D7, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(C8));
+
+  expected = 0ULL;
+  set_bit(A7, expected);
+  set_bit(B8, expected);
+  set_bit(B7, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(A8));
+
+  expected = 0ULL;
+  set_bit(A4, expected);
+  set_bit(B4, expected);
+  set_bit(B3, expected);
+  set_bit(B2, expected);
+  set_bit(A2, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(A3));
+
+  expected = 0ULL;
+  set_bit(A2, expected);
+  set_bit(B2, expected);
+  set_bit(B1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, king_attack_mask(A1));
 }
 
 int main(void) {
