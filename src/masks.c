@@ -64,14 +64,22 @@ U64 pawn_motion_mask(square, side) {
 
 U64 king_attack_mask(square) {
   U64 bb = 0ULL;
-  if(!get_bit(square, RANK_8)) set_bit((square - 8), bb);
-  if(!get_bit(square, FILE_H) && !get_bit(square, RANK_8)) set_bit((square - 7), bb);
-  if(!get_bit(square, FILE_A) && !get_bit(square, RANK_8)) set_bit((square - 9), bb);
-  if(!get_bit(square, FILE_A)) set_bit((square - 1), bb);
-  if(!get_bit(square, FILE_H)) set_bit((square + 1), bb);
-  if(!get_bit(square, RANK_1) && !get_bit(square, FILE_A)) set_bit((square + 7), bb);
-  if(!get_bit(square, RANK_1)) set_bit((square + 8), bb);
-  if(!get_bit(square, RANK_1) && !get_bit(square, FILE_H)) set_bit((square + 9), bb);
+  if(!get_bit(square, RANK_8))
+    set_bit((square - 8), bb);
+  if(!get_bit(square, FILE_H) && !get_bit(square, RANK_8))
+    set_bit((square - 7), bb);
+  if(!get_bit(square, FILE_A) && !get_bit(square, RANK_8))
+    set_bit((square - 9), bb);
+  if(!get_bit(square, FILE_A))
+    set_bit((square - 1), bb);
+  if(!get_bit(square, FILE_H))
+    set_bit((square + 1), bb);
+  if(!get_bit(square, RANK_1) && !get_bit(square, FILE_A))
+    set_bit((square + 7), bb);
+  if(!get_bit(square, RANK_1))
+    set_bit((square + 8), bb);
+  if(!get_bit(square, RANK_1) && !get_bit(square, FILE_H))
+    set_bit((square + 9), bb);
 
   return bb;
 }
