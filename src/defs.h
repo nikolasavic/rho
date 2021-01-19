@@ -1,3 +1,6 @@
+#ifndef DEFS_H
+#define DEFS_H
+
 #define U64 unsigned long long
 
 enum {
@@ -12,3 +15,5 @@ enum {
 };
 
 enum { WHITE, BLACK };
+
+#endif
