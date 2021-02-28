@@ -1,5 +1,5 @@
 all:
-	gcc  -o build/rho src/rho.c src/bitboard.c
+	gcc  -o build/rho src/rho.c src/bitboard.c src/masks.c
 
 test_init:
 	mkdir -p build/test

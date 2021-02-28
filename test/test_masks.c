@@ -285,11 +285,70 @@ void test_knight_attack_mask(void) {
   TEST_ASSERT_EQUAL_INT(expected, knight_attack_mask(H6));
 }
 
+void test_bishop_attack_mask(void) {
+  U64 expected;
+
+  expected = 0ULL;
+  set_bit(B1, expected);
+  set_bit(C2, expected);
+  set_bit(E4, expected);
+  set_bit(F5, expected);
+  set_bit(G6, expected);
+  set_bit(H7, expected);
+  set_bit(A6, expected);
+  set_bit(B5, expected);
+  set_bit(C4, expected);
+  set_bit(E2, expected);
+  set_bit(F1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(D3));
+
+  expected = 0ULL;
+  set_bit(B1, expected);
+  set_bit(B3, expected);
+  set_bit(C4, expected);
+  set_bit(D5, expected);
+  set_bit(E6, expected);
+  set_bit(F7, expected);
+  set_bit(G8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(A2));
+
+  expected = 0ULL;
+  set_bit(A6, expected);
+  set_bit(B7, expected);
+  set_bit(D7, expected);
+  set_bit(E6, expected);
+  set_bit(F5, expected);
+  set_bit(G4, expected);
+  set_bit(H3, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(C8));
+
+  expected = 0ULL;
+  set_bit(G7, expected);
+  set_bit(F6, expected);
+  set_bit(E5, expected);
+  set_bit(D4, expected);
+  set_bit(C3, expected);
+  set_bit(B2, expected);
+  set_bit(A1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(H8));
+
+  expected = 0ULL;
+  set_bit(H2, expected);
+  set_bit(F2, expected);
+  set_bit(E3, expected);
+  set_bit(D4, expected);
+  set_bit(C5, expected);
+  set_bit(B6, expected);
+  set_bit(A7, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(G1));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_pawn_attack_mask);
   RUN_TEST(test_pawn_motion_mask);
   RUN_TEST(test_king_attack_mask);
   RUN_TEST(test_knight_attack_mask);
+  RUN_TEST(test_bishop_attack_mask);
   return UNITY_END();
 }

@@ -106,5 +106,37 @@ U64 knight_attack_mask(square) {
     set_bit((square + 15), bb);
   if(!get_bit(square, RANK_12) && !get_bit(square, FILE_H))
     set_bit((square + 17), bb);
+
+  return bb;
+}
+
+U64 bishop_attack_mask(square) {
+  U64 bb = 0ULL;
+  int target;
+
+  target = square;
+  while(!get_bit(target, FILE_H) && !get_bit(target, RANK_8)) {
+    target -= 7;
+    set_bit(target, bb);
+  }
+
+  target = square;
+  while(!get_bit(target, FILE_A) && !get_bit(target, RANK_8)) {
+    target -= 9;
+    set_bit(target, bb);
+  }
+
+  target = square;
+  while(!get_bit(target, FILE_H) && !get_bit(target, RANK_1)) {
+    target += 9;
+    set_bit(target, bb);
+  }
+
+  target = square;
+  while(!get_bit(target, FILE_A) && !get_bit(target, RANK_1)) {
+    target += 7;
+    set_bit(target, bb);
+  }
+
   return bb;
 }
