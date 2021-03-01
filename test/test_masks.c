@@ -343,6 +343,27 @@ void test_bishop_attack_mask(void) {
   TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(G1));
 }
 
+void test_rook_attack_mask(void){
+  U64 expected;
+
+  expected = 0ULL;
+  set_bit(E8, expected);
+  set_bit(E7, expected);
+  set_bit(E6, expected);
+  set_bit(E5, expected);
+  set_bit(E3, expected);
+  set_bit(E2, expected);
+  set_bit(E1, expected);
+  set_bit(A4, expected);
+  set_bit(B4, expected);
+  set_bit(C4, expected);
+  set_bit(D4, expected);
+  set_bit(F4, expected);
+  set_bit(G4, expected);
+  set_bit(H4, expected);
+  TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(E4));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_pawn_attack_mask);
@@ -350,5 +371,6 @@ int main(void) {
   RUN_TEST(test_king_attack_mask);
   RUN_TEST(test_knight_attack_mask);
   RUN_TEST(test_bishop_attack_mask);
+  RUN_TEST(test_rook_attack_mask);
   return UNITY_END();
 }

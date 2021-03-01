@@ -140,3 +140,34 @@ U64 bishop_attack_mask(int square) {
 
   return bb;
 }
+
+U64 rook_attack_mask(int square) {
+  U64 bb = 0ULL;
+  int target;
+
+  target = square;
+  while(!get_bit(target, RANK_8)) {
+    target -= 8;
+    set_bit(target, bb);
+  }
+
+  target = square;
+  while(!get_bit(target, RANK_1)) {
+    target += 8;
+    set_bit(target, bb);
+  }
+
+  target = square;
+  while(!get_bit(target, FILE_H)) {
+    target += 1;
+    set_bit(target, bb);
+  }
+
+  target = square;
+  while(!get_bit(target, FILE_A)) {
+    target -= 1;
+    set_bit(target, bb);
+  }
+
+  return bb;
+}

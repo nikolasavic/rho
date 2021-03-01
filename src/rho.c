@@ -9,7 +9,7 @@ int main(void) {
   for(int rank = 1; rank <= 8; rank++) {
     for(int file = 1; file <= 8; file++) {
       int square = (file - 1) + (rank - 1) * 8;
-      bb = bishop_attack_mask(square);
+      bb = rook_attack_mask(square);
       print_bitboard(bb);
     }
   }
