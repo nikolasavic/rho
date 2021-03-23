@@ -287,6 +287,7 @@ void test_knight_attack_mask(void) {
 
 void test_bishop_attack_mask(void) {
   U64 expected;
+  U64 no_block = 0ULL;
 
   expected = 0ULL;
   set_bit(B1, expected);
@@ -300,7 +301,7 @@ void test_bishop_attack_mask(void) {
   set_bit(C4, expected);
   set_bit(E2, expected);
   set_bit(F1, expected);
-  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(D3));
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(D3, no_block));
 
   expected = 0ULL;
   set_bit(B1, expected);
@@ -310,7 +311,7 @@ void test_bishop_attack_mask(void) {
   set_bit(E6, expected);
   set_bit(F7, expected);
   set_bit(G8, expected);
-  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(A2));
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(A2, no_block));
 
   expected = 0ULL;
   set_bit(A6, expected);
@@ -320,7 +321,7 @@ void test_bishop_attack_mask(void) {
   set_bit(F5, expected);
   set_bit(G4, expected);
   set_bit(H3, expected);
-  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(C8));
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(C8, no_block));
 
   expected = 0ULL;
   set_bit(G7, expected);
@@ -330,7 +331,7 @@ void test_bishop_attack_mask(void) {
   set_bit(C3, expected);
   set_bit(B2, expected);
   set_bit(A1, expected);
-  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(H8));
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(H8, no_block));
 
   expected = 0ULL;
   set_bit(H2, expected);
@@ -340,11 +341,14 @@ void test_bishop_attack_mask(void) {
   set_bit(C5, expected);
   set_bit(B6, expected);
   set_bit(A7, expected);
-  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(G1));
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(G1, no_block));
 }
 
 void test_rook_attack_mask(void){
   U64 expected;
+  U64 no_block = 0ULL;
+  print_bitboard(no_block);
+
 
   expected = 0ULL;
   set_bit(E8, expected);
@@ -361,7 +365,7 @@ void test_rook_attack_mask(void){
   set_bit(F4, expected);
   set_bit(G4, expected);
   set_bit(H4, expected);
-  TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(E4));
+  TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(E4, no_block));
 }
 
 int main(void) {

@@ -110,7 +110,7 @@ U64 knight_attack_mask(int square) {
   return bb;
 }
 
-U64 bishop_attack_mask(int square) {
+U64 bishop_attack_mask(int square, U64 block) {
   U64 bb = 0ULL;
   int target;
 
@@ -141,7 +141,7 @@ U64 bishop_attack_mask(int square) {
   return bb;
 }
 
-U64 rook_attack_mask(int square) {
+U64 rook_attack_mask(int square, U64 block) {
   U64 bb = 0ULL;
   int target;
 
