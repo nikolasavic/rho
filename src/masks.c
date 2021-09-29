@@ -118,24 +118,36 @@ U64 bishop_attack_mask(int square, U64 block) {
   while(!get_bit(target, FILE_H) && !get_bit(target, RANK_8)) {
     target -= 7;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   target = square;
   while(!get_bit(target, FILE_A) && !get_bit(target, RANK_8)) {
     target -= 9;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   target = square;
   while(!get_bit(target, FILE_H) && !get_bit(target, RANK_1)) {
     target += 9;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   target = square;
   while(!get_bit(target, FILE_A) && !get_bit(target, RANK_1)) {
     target += 7;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   return bb;
@@ -149,24 +161,36 @@ U64 rook_attack_mask(int square, U64 block) {
   while(!get_bit(target, RANK_8)) {
     target -= 8;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   target = square;
   while(!get_bit(target, RANK_1)) {
     target += 8;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   target = square;
   while(!get_bit(target, FILE_H)) {
     target += 1;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   target = square;
   while(!get_bit(target, FILE_A)) {
     target -= 1;
     set_bit(target, bb);
+
+    if(get_bit(target, block))
+      break;
   }
 
   return bb;

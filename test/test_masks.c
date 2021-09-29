@@ -344,11 +344,33 @@ void test_bishop_attack_mask(void) {
   TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(G1, no_block));
 }
 
-void test_rook_attack_mask(void){
+void test_bishop_attack_mask_with_block(void) {
+  U64 block = 0ULL;
+  set_bit(C4, block);
+  set_bit(C2, block);
+  set_bit(F1, block);
+  set_bit(F5, block);
+
+  U64 expected = 0ULL;
+  set_bit(C2, expected);
+  set_bit(E4, expected);
+  set_bit(F5, expected);
+  set_bit(C4, expected);
+  set_bit(E2, expected);
+  set_bit(F1, expected);
+
+  printf("block");
+  print_bitboard(block);
+  printf("expected");
+  print_bitboard(expected);
+  printf("actual");
+  print_bitboard(bishop_attack_mask(D3, block));
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(D3, block));
+}
+
+void test_rook_attack_mask(void) {
   U64 expected;
   U64 no_block = 0ULL;
-  print_bitboard(no_block);
-
 
   expected = 0ULL;
   set_bit(E8, expected);
@@ -368,6 +390,30 @@ void test_rook_attack_mask(void){
   TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(E4, no_block));
 }
 
+void test_rook_attack_mask_with_block(void) {
+  U64 block = 0ULL;
+  set_bit(E5, block);
+  set_bit(B4, block);
+  set_bit(H4, block);
+  set_bit(E1, block);
+
+  U64 expected = 0ULL;
+  set_bit(E5, expected);
+  set_bit(E3, expected);
+  set_bit(E2, expected);
+  set_bit(E1, expected);
+  set_bit(B4, expected);
+  set_bit(C4, expected);
+  set_bit(D4, expected);
+  set_bit(F4, expected);
+  set_bit(G4, expected);
+  set_bit(H4, expected);
+
+
+  U64 actual = rook_attack_mask(E4, block);
+  TEST_ASSERT_EQUAL_INT(expected, actual);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_pawn_attack_mask);
@@ -375,6 +421,8 @@ int main(void) {
   RUN_TEST(test_king_attack_mask);
   RUN_TEST(test_knight_attack_mask);
   RUN_TEST(test_bishop_attack_mask);
+  RUN_TEST(test_bishop_attack_mask_with_block);
   RUN_TEST(test_rook_attack_mask);
+  RUN_TEST(test_rook_attack_mask_with_block);
   return UNITY_END();
 }
