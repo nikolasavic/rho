@@ -16,4 +16,6 @@ enum {
 
 enum { WHITE, BLACK };
 
+enum {P, B, N, R, Q, K};
+
 #endif
