@@ -2,6 +2,7 @@
 #define DEFS_H
 
 #define U64 unsigned long long
+#define castle_t unsigned char
 
 enum {
   A8, B8, C8, D8, E8, F8, G8, H8,
@@ -14,8 +15,10 @@ enum {
   A1, B1, C1, D1, E1, F1, G1, H1
 };
 
-enum { WHITE, BLACK };
+typedef enum side {
+  WHITE, BLACK
+} side_t;
 
-enum {P, B, N, R, Q, K};
+enum { P, B, N, R, Q, K };
 
 #endif

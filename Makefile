@@ -21,5 +21,10 @@ test_board:
 	gcc test/test_board.c src/board.c unity/unity.c -o build/test/test_board
 	./build/test/test_board
 
+test_parser:
+	mkdir -p build/test
+	gcc test/test_parser.c src/parser.c unity/unity.c -o build/test/test_parser
+	./build/test/test_parser
+
 clean:
 	rm -rf build/*
