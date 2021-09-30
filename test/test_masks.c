@@ -359,12 +359,6 @@ void test_bishop_attack_mask_with_block(void) {
   set_bit(E2, expected);
   set_bit(F1, expected);
 
-  printf("block");
-  print_bitboard(block);
-  printf("expected");
-  print_bitboard(expected);
-  printf("actual");
-  print_bitboard(bishop_attack_mask(D3, block));
   TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(D3, block));
 }
 
