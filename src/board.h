@@ -2,12 +2,13 @@
 #define BOARD_H
 
 #include "defs.h"
-#include "bitboard.h"
 
-struct board {
+typedef struct board {
   int side_to_move;
   int castle_rights;
-  bitboard pieces[2][6];
-};
+  U64 pieces[2][6];
+} board_t;
+
+board_t empty_board(void);
 
 #endif
