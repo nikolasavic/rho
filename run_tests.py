@@ -6,8 +6,8 @@ import sys, subprocess, re
 if "-h" in sys.argv or "--help" in sys.argv:
     print("Test Runner")
     print(" Options:")
-    print("  --passonly (-p)")
-    print("  --failonly (-f)")
+    print("  --pass (-p)")
+    print("  --fail (-f)")
     print("  --all (-a)")
     print()
     sys.exit(0)
@@ -24,13 +24,11 @@ with open("Makefile", "r") as file:
 # Parse args
 print_pass = False
 print_fail = False
-if "--failonly" in sys.argv or "-f" in sys.argv:
+if "--fail" in sys.argv or "-f" in sys.argv:
     print_fail = True
-if "--passonly" in sys.argv or "-p" in sys.argv:
+if "--pass" in sys.argv or "-p" in sys.argv:
     print_pass = True
-if "--all" in sys.argv or "-a" in sys.argv:
-    print_pass = True
-    print_fail = True
+
 
 # Run tests
 exit_codes = []
@@ -39,6 +37,11 @@ fail_count = 0
 error = None
 
 for test in test_list:
+    if "-a" in sys.argv or "-all" in sys.argv:
+        run = subprocess.run(["make", test])
+        print()
+        next
+
     run = subprocess.run(["make", test], capture_output=True, text=True)
     lines = run.stdout.splitlines()
 
@@ -52,7 +55,7 @@ for test in test_list:
             if print_fail:
                 print(l)
         elif run.returncode != 0:
-            error = l
+            error = run.stderr
 
     exit_codes.append(run.returncode)
 
