@@ -13,5 +13,6 @@ typedef struct board_s {
 } board_t;
 
 board_t empty_board(void);
+int validate_board(board_t board);
 
 #endif
