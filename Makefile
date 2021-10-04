@@ -1,10 +1,10 @@
 all:
 	gcc  -o build/rho src/rho.c src/bitboard.c src/masks.c
 
-test_init:
+test_defs:
 	mkdir -p build/test
-	gcc test/test_init.c src/init.c unity/unity.c -o build/test/test_init
-	./build/test/test_init
+	gcc test/test_defs.c src/defs.c unity/unity.c -o build/test/test_defs
+	./build/test/test_defs
 
 test_bitboard:
 	mkdir -p build/test

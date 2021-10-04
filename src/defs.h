@@ -4,7 +4,11 @@
 #define U64 unsigned long long
 #define castle_t unsigned char
 
-enum {
+extern char *square_name[];
+extern char *piece_unicode[];
+extern char *piece_ascii[];
+
+typedef enum square_e{
   A8, B8, C8, D8, E8, F8, G8, H8,
   A7, B7, C7, D7, E7, F7, G7, H7,
   A6, B6, C6, D6, E6, F6, G6, H6,
@@ -13,12 +17,15 @@ enum {
   A3, B3, C3, D3, E3, F3, G3, H3,
   A2, B2, C2, D2, E2, F2, G2, H2,
   A1, B1, C1, D1, E1, F1, G1, H1
-};
+} square_t;
 
-typedef enum side {
+typedef enum side_e {
   WHITE, BLACK
 } side_t;
 
-enum { P, B, N, R, Q, K };
+typedef enum piece_e {
+  P, B, N, R, Q, K,
+  p, b, n, r, q, k
+} piece_t;
 
 #endif

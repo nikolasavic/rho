@@ -1,5 +1,4 @@
 #include "../src/defs.h"
-#include "../src/init.h"
 #include "../unity/unity.h"
 
 void setUp(void) {
