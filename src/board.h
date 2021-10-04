@@ -3,10 +3,13 @@
 
 #include "defs.h"
 
-typedef struct board {
-  int side_to_move;
-  int castle_rights;
+typedef struct board_s {
+  side_t side_to_move;
+  castle_t castle_rights;
   U64 pieces[2][6];
+  square_t ep_square;
+  int half_move_clock;
+  int full_move_num;
 } board_t;
 
 board_t empty_board(void);
