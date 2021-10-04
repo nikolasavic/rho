@@ -21,7 +21,7 @@ void test_empty_board(void) {
 }
 
 void test_validate_board(void) {
-  board_t board = {0};
+  board_t board = { 0 };
   board.pieces[BLACK][P] = 268959744ULL;
   board.pieces[BLACK][N] = 137438953472ULL;
   board.pieces[BLACK][B] = 512ULL;
@@ -38,7 +38,7 @@ void test_validate_board(void) {
   board.half_move_clock = 7;
   board.full_move_num = 15;
 
-  TEST_ASSERT_EQUAL_INT(0,validate_board(board));
+  TEST_ASSERT_EQUAL_INT(0, validate_board(board));
 }
 
 int main(void) {
