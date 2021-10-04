@@ -1,5 +1,7 @@
+#include <string.h>
 #include "../src/defs.h"
 #include "../src/parser.h"
+#include "../src/board.h"
 #include "../unity/unity.h"
 
 void setUp(void) {
@@ -50,9 +52,103 @@ void test_castling_rights(void) {
   TEST_ASSERT_EQUAL_CHAR(0x0, parse_castling_rights(none));
 }
 
+void test_parse_piece_char(void) {
+  U64 expected[2][6] = { {0} };
+  U64 actual[2][6] = { {0} };
+  square_t square;
+  char piece;
+
+  piece = 'P';
+  square = D6;
+  expected[WHITE][P] = 524288ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'B';
+  square = C2;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[WHITE][B] = 1125899906842624ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'N';
+  square = F4;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[WHITE][N] = 137438953472ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'Q';
+  square = E4;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[WHITE][Q] = 68719476736ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'K';
+  square = H5;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[WHITE][K] = 2147483648ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'p';
+  square = G4;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[BLACK][P] = 274877906944ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'b';
+  square = H8;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[BLACK][B] = 128ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'n';
+  square = C7;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[BLACK][N] = 1024ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'r';
+  square = B8;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[BLACK][R] = 2ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'q';
+  square = A5;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[BLACK][Q] = 16777216ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+
+  piece = 'k';
+  square = A2;
+  memset(actual, 0, sizeof(expected));
+  memset(expected, 0, sizeof(expected));
+  expected[BLACK][K] = 281474976710656ULL;
+  parse_piece_char(actual, piece, square);
+  TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_side_to_move);
   RUN_TEST(test_castling_rights);
+  RUN_TEST(test_parse_piece_char);
   return UNITY_END();
 }
