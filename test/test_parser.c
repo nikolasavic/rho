@@ -198,6 +198,38 @@ void test_parse_square(void) {
   TEST_ASSERT_EQUAL_INT(H1, parse_square(square));
 }
 
+void test_parse_fen(void) {
+  board_t board;
+
+  TEST_ASSERT_EQUAL_INT(SUCCESS,
+                      parse_fen( &board,
+      "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
+  TEST_ASSERT_EQUAL_INT(WHITE, board.side_to_move);
+  TEST_ASSERT_EQUAL_STRING("KQkq", decode_castling_rights(board.castle_rights));
+  TEST_ASSERT_EQUAL_INT(NULL_SQ, board.ep_square);
+  TEST_ASSERT_EQUAL_INT(0, board.half_move_clock);
+  TEST_ASSERT_EQUAL_INT(1, board.full_move_num);
+
+  TEST_ASSERT_EQUAL_INT(SUCCESS,
+                      parse_fen( &board,
+      "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Qq e6 34 42"));
+  TEST_ASSERT_EQUAL_INT(BLACK, board.side_to_move);
+  TEST_ASSERT_EQUAL_STRING(" Q q", decode_castling_rights(board.castle_rights));
+  TEST_ASSERT_EQUAL_INT(E6, board.ep_square);
+  TEST_ASSERT_EQUAL_INT(34, board.half_move_clock);
+  TEST_ASSERT_EQUAL_INT(42, board.full_move_num);
+
+  TEST_ASSERT_EQUAL_INT(SUCCESS,
+                      parse_fen( &board,
+      "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b - - 0 1"));
+  TEST_ASSERT_EQUAL_INT(BLACK, board.side_to_move);
+  TEST_ASSERT_EQUAL_STRING("-   ", decode_castling_rights(board.castle_rights));
+  TEST_ASSERT_EQUAL_INT(NULL_SQ, board.ep_square);
+  TEST_ASSERT_EQUAL_INT(0, board.half_move_clock);
+  TEST_ASSERT_EQUAL_INT(1, board.full_move_num);
+
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_side_to_move);
@@ -205,5 +237,6 @@ int main(void) {
   RUN_TEST(test_parse_piece_char);
   RUN_TEST(test_parse_string_int);
   RUN_TEST(test_parse_square);
+  RUN_TEST(test_parse_fen);
   return UNITY_END();
 }

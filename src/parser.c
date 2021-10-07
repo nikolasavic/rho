@@ -3,6 +3,7 @@
 #include "defs.h"
 #include "bitboard.h"
 #include "board.h"
+#include "parser.h"
 
 side_t parse_side_to_move(const char string) {
   if(string == 'w')
@@ -86,3 +87,75 @@ square_t parse_square(const char *string) {
   return (8 - rank) * 8 + file;
 }
 
+exit_t parse_fen(board_t * board, const char *fen) {
+  empty_board(board);
+  const char *fen_ptr = fen;
+  square_t square = 0;
+
+  while(square < 64) {
+    if(*fen_ptr == '/') {
+      fen_ptr++;
+      continue;
+    }
+
+    if(*fen_ptr > '0' && *fen_ptr < '9') {
+      square += *fen_ptr - 48;
+      fen_ptr++;
+      continue;
+    }
+
+    parse_piece_char(board->pieces, *fen_ptr, square);
+    fen_ptr++;
+    square++;
+  }
+  fen_ptr++;
+
+  board->side_to_move = parse_side_to_move(*fen_ptr);
+  fen_ptr += 2;
+
+  int len = 0;
+  char buffer[5] = { 0 };
+  while(*(fen_ptr + len) != ' ') {
+    len++;
+  }
+  strncpy(buffer, fen_ptr, len);
+  board->castle_rights = parse_castling_rights(buffer);
+  fen_ptr += len;
+
+  if(*fen_ptr == ' ') {
+    fen_ptr++;
+  }
+
+  if(*fen_ptr == '-') {
+    board->ep_square = NULL_SQ;
+    fen_ptr += 2;
+  } else {
+    memset(buffer, 0, sizeof(buffer));
+    strncpy(buffer, fen_ptr, 2);
+    board->ep_square = parse_square(buffer);
+    fen_ptr += 3;
+  }
+
+  len = 0;
+  while(*(fen_ptr + len) != ' ') {
+    len++;
+  }
+  memset(buffer, 0, sizeof(buffer));
+  strncpy(buffer, fen_ptr, len);
+  board->half_move_clock = parse_string_int(buffer);
+  fen_ptr += len + 1;
+
+  len = 0;
+  while(*(fen_ptr + len) != '\0') {
+    len++;
+  }
+  memset(buffer, 0, sizeof(buffer));
+  strncpy(buffer, fen_ptr, len);
+  board->full_move_num = parse_string_int(buffer);
+
+  if(validate_board(board, VERBOSE) == SUCCESS) {
+    return SUCCESS;
+  } else {
+    return FAIL;
+  }
+}
