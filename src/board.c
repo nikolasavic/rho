@@ -4,21 +4,22 @@
 #include "board.h"
 #include "bitboard.h"
 
-int piece_identity(int square, board_t board);
+int piece_identity(int square, board_t *board);
+char *decode_castling_rights(int castle_idx);
 
-int validate_board(board_t board) {
-  if(board.half_move_clock < 0) {
-    printf("Error: negative half_move_clock: %d\n", board.half_move_clock);
+int validate_board(board_t *board) {
+  if(board->half_move_clock < 0) {
+    printf("Error: negative half_move_clock: %d\n", board->half_move_clock);
     return 1;
   }
 
-  if(board.full_move_num < 0) {
-    printf("Error: negative full_move_num: %d\n", board.full_move_num);
+  if(board->full_move_num < 0) {
+    printf("Error: negative full_move_num: %d\n", board->full_move_num);
     return 1;
   }
 
-  if(board.ep_square < 0 || board.ep_square > 63) {
-    printf("Error: invalid ep_square: %d\n", board.ep_square);
+  if(board->ep_square < 0 || board->ep_square > 63) {
+    printf("Error: invalid ep_square: %d\n", board->ep_square);
     return 1;
   }
 
@@ -32,7 +33,7 @@ int validate_board(board_t board) {
       found_piece = -1;
       for(int side = 0; side < 2; side++) {
         for(int piece = 0; piece < 6; piece++) {
-          if(get_bit(square, board.pieces[side][piece]) == 1) {
+          if(get_bit(square, board->pieces[side][piece]) == 1) {
             if(found_piece == -1 && found_side == -1) {
               found_side = side;
               found_piece = piece;
@@ -53,8 +54,8 @@ int validate_board(board_t board) {
   return 0;
 }
 
-void print_board(board_t board) {
-  char side_to_move = board.side_to_move ? 'w' : 'b';
+void print_board(board_t *board) {
+  char side_to_move = board->side_to_move == 0 ? 'w' : 'b';
   int piece_idx;
   printf("\n");
   for(int rank = 1; rank <= 8; rank++) {
@@ -72,17 +73,19 @@ void print_board(board_t board) {
     printf("\n");
   }
   printf("\n   a b c d e f g h\n");
-  printf("%c   - Side to move\n", side_to_move);
-  printf("%s  - En passant sq\n", square_name[board.ep_square]);
-  printf("%2d  - Half move clock\n", board.half_move_clock);
-  printf("%2d  - Move\n", board.full_move_num);
+  printf("%c    - Side to move\n", side_to_move);
+  printf("%s - Castling rights\n",
+         decode_castling_rights(board->castle_rights));
+  printf("%s   - En passant sq\n", square_name[board->ep_square]);
+  printf("%2d   - Half move clock\n", board->half_move_clock);
+  printf("%2d   - Move\n", board->full_move_num);
 }
 
-int piece_identity(int square, board_t board) {
+int piece_identity(int square, board_t *board) {
   int found = -1;
   for(int side = 0; side < 2; side++) {
     for(int piece = 0; piece < 6; piece++) {
-      if(get_bit(square, board.pieces[side][piece]) == 1) {
+      if(get_bit(square, board->pieces[side][piece]) == 1) {
         found = piece + 6 * side;
       }
     }
@@ -91,8 +94,17 @@ int piece_identity(int square, board_t board) {
   return found;
 }
 
-board_t empty_board() {
-  board_t board;
-  memset(&board, 0, sizeof(board_t));
-  return board;
+char *decode_castling_rights(int castle_idx) {
+  char *castle_rights[] = {
+    "-   ", "   q", "  k ", "  kq",
+    " Q  ", " Q q", " Qk ", " Qkq",
+    "K   ", "K  q", "K k ", "K kq",
+    "KQ  ", "KQ q", "KQk ", "KQkq"
+  };
+
+  return castle_rights[castle_idx];
+}
+
+void empty_board(board_t *board) {
+  memset(board, 0, sizeof(board_t));
 }

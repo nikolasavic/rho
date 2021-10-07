@@ -9,7 +9,8 @@ void tearDown(void) {
 }
 
 void test_empty_board(void) {
-  board_t b = empty_board();
+  board_t b;
+  empty_board(&b);
   TEST_ASSERT_EQUAL_INT(0, b.side_to_move);
   TEST_ASSERT_EQUAL_INT(0, b.castle_rights);
 
@@ -38,7 +39,7 @@ void test_validate_board(void) {
   board.half_move_clock = 7;
   board.full_move_num = 15;
 
-  TEST_ASSERT_EQUAL_INT(0, validate_board(board));
+  TEST_ASSERT_EQUAL_INT(0, validate_board(&board));
 }
 
 int main(void) {

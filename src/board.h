@@ -12,7 +12,7 @@ typedef struct board_s {
   int full_move_num;
 } board_t;
 
-board_t empty_board(void);
-int validate_board(board_t board);
+void empty_board(board_t *);
+int validate_board(board_t *);
 
 #endif
