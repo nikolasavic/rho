@@ -6,40 +6,40 @@
 
 int piece_identity(int square, board_t * board);
 
-int validate_board(board_t * board, int output) {
+exit_t validate_board(board_t * board, val_opt_t option) {
   if(board->half_move_clock < 0) {
-    if(output == VERBOSE) {
+    if(option == VERBOSE) {
       printf("Error: negative half_move_clock: %d\n", board->half_move_clock);
     }
-    return 1;
+    return FAIL;
   }
 
   if(board->full_move_num < 0) {
-    if(output == VERBOSE) {
+    if(option == VERBOSE) {
       printf("Error: negative full_move_num: %d\n", board->full_move_num);
     }
-    return 1;
+    return FAIL;
   }
 
   if(board->ep_square < 0 || board->ep_square > 63) {
-    if(output == VERBOSE) {
+    if(option == VERBOSE) {
       printf("Error: invalid ep_square: %d\n", board->ep_square);
     }
-    return 1;
+    return FAIL;
   }
 
   if(board->castle_rights < 0 || board->castle_rights > 15) {
-    if(output == VERBOSE) {
+    if(option == VERBOSE) {
       printf("Error: invalid castling rights: %d\n", board->castle_rights);
     }
-    return 1;
+    return FAIL;
   }
 
   if(board->side_to_move != 0 && board->side_to_move != 1) {
-    if(output == VERBOSE) {
+    if(option == VERBOSE) {
       printf("Error: invalid side to move: %d\n", board->side_to_move);
     }
-    return 1;
+    return FAIL;
   }
 
   int found_side;
@@ -57,14 +57,14 @@ int validate_board(board_t * board, int output) {
               found_side = side;
               found_piece = piece;
             } else {
-              if(output == VERBOSE) {
+              if(option == VERBOSE) {
                 printf("Error: piece collision on %s\n", square_name[square]);
                 printf("side: %c, piece: %s\n", found_side == 0 ? 'w' : 'b',
                        piece_ascii[found_piece]);
                 printf("side: %c, piece: %s\n", side == 0 ? 'w' : 'b',
                        piece_ascii[piece]);
               }
-              return 1;
+              return FAIL;
             }
           }
         }
@@ -72,7 +72,7 @@ int validate_board(board_t * board, int output) {
     }
   }
 
-  return 0;
+  return SUCCESS;
 }
 
 void print_board(board_t * board) {

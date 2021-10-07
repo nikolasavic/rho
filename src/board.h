@@ -2,6 +2,8 @@
 #define BOARD_H
 
 #include "defs.h"
+#include "exits.h"
+#include "options.h"
 
 typedef struct board_s {
   side_t side_to_move;
@@ -12,12 +14,9 @@ typedef struct board_s {
   int full_move_num;
 } board_t;
 
-typedef enum {
-  SILENT, VERBOSE
-} validation_output_t;
 
 void empty_board(board_t *);
-int validate_board(board_t *, int);
+exit_t validate_board(board_t *, val_opt_t);
 char *decode_castling_rights(int);
 
 #endif
