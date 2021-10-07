@@ -1,5 +1,6 @@
 #include "../src/defs.h"
 #include "../src/bitboard.h"
+#include "../src/board.h"
 #include "../unity/unity.h"
 
 void setUp(void) {
