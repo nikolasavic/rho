@@ -1,7 +1,7 @@
 #ifndef EXITS_H
 #define EXITS_H
 
-typedef enum exit {
+typedef enum {
   SUCCESS, FAIL
 } exit_t;
 
