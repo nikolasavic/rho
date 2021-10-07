@@ -12,7 +12,9 @@ typedef struct board_s {
   int full_move_num;
 } board_t;
 
-enum { SILENT, VERBOSE };
+typedef enum {
+  SILENT, VERBOSE
+} validation_output_t;
 
 void empty_board(board_t *);
 int validate_board(board_t *, int);
