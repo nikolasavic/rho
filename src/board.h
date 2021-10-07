@@ -12,7 +12,10 @@ typedef struct board_s {
   int full_move_num;
 } board_t;
 
+enum { SILENT, VERBOSE };
+
 void empty_board(board_t *);
-int validate_board(board_t *);
+int validate_board(board_t *, int);
+char *decode_castling_rights(int);
 
 #endif

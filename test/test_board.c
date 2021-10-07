@@ -11,8 +11,13 @@ void tearDown(void) {
 void test_empty_board(void) {
   board_t b;
   empty_board(&b);
-  TEST_ASSERT_EQUAL_INT(0, b.side_to_move);
-  TEST_ASSERT_EQUAL_INT(0, b.castle_rights);
+
+  TEST_ASSERT_EQUAL_INT(NULL_SIDE, b.side_to_move);
+  TEST_ASSERT_EQUAL_INT(NULL_SQ, b.ep_square);
+  TEST_ASSERT_EQUAL_INT(0, b.half_move_clock);
+  TEST_ASSERT_EQUAL_INT(0, b.full_move_num);
+  TEST_ASSERT_EQUAL_INT(16, b.castle_rights);
+  TEST_ASSERT_EQUAL_STRING("null", decode_castling_rights(b.castle_rights));
 
   for(int side = 0; side < 2; side++) {
     for(int piece = 0; piece < 6; piece++) {
@@ -35,16 +40,25 @@ void test_validate_board(void) {
   board.pieces[WHITE][R] = 9295429630892703744ULL;
   board.pieces[WHITE][Q] = 576460752303423488ULL;
   board.pieces[WHITE][K] = 18014398509481984ULL;
-  board.ep_square = E6;
+  board.ep_square = 23;
   board.half_move_clock = 7;
   board.full_move_num = 15;
+  board.castle_rights = 2;
+  board.side_to_move = 0;
 
-  TEST_ASSERT_EQUAL_INT(0, validate_board(&board));
+  TEST_ASSERT_EQUAL_INT(0, validate_board(&board, SILENT));
+}
+
+void test_empty_board_is_invalid(void) {
+  board_t board = { 0 };
+  empty_board(&board);
+  TEST_ASSERT_EQUAL_INT(1, validate_board(&board, VERBOSE));
 }
 
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_empty_board);
   RUN_TEST(test_validate_board);
+  RUN_TEST(test_empty_board_is_invalid);
   return UNITY_END();
 }
