@@ -46,13 +46,13 @@ void test_validate_board(void) {
   board.castle_rights = 2;
   board.side_to_move = 0;
 
-  TEST_ASSERT_EQUAL_INT(0, validate_board(&board, SILENT));
+  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_board(&board, SILENT));
 }
 
 void test_empty_board_is_invalid(void) {
   board_t board = { 0 };
   empty_board(&board);
-  TEST_ASSERT_EQUAL_INT(1, validate_board(&board, VERBOSE));
+  TEST_ASSERT_EQUAL_INT(FAIL, validate_board(&board, SILENT));
 }
 
 int main(void) {

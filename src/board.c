@@ -21,7 +21,7 @@ exit_t validate_board(board_t * board, val_opt_t option) {
     return FAIL;
   }
 
-  if(board->ep_square < 0 || board->ep_square > 63) {
+  if(board->ep_square < 0 || board->ep_square > 64) {
     if(option == VERBOSE) {
       printf("Error: invalid ep_square: %d\n", board->ep_square);
     }
@@ -97,7 +97,11 @@ void print_board(board_t * board) {
   printf("%c    - Side to move\n", side_to_move);
   printf("%s - Castling rights\n",
          decode_castling_rights(board->castle_rights));
-  printf("%s   - En passant sq\n", square_name[board->ep_square]);
+  if(board->ep_square == NULL_SQ) {
+    printf("%s - En passant sq\n", square_name[board->ep_square]);
+  } else {
+    printf("%s   - En passant sq\n", square_name[board->ep_square]);
+  }
   printf("%2d   - Half move clock\n", board->half_move_clock);
   printf("%2d   - Move\n", board->full_move_num);
 }
