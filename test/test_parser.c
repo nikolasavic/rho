@@ -52,6 +52,32 @@ void test_castling_rights(void) {
   TEST_ASSERT_EQUAL_CHAR(0x0, parse_castling_rights(none));
 }
 
+void test_parse_string_int(void){
+  char buffer_1[] = { '0', '\0', '\0', '\0', '\0'};
+  TEST_ASSERT_EQUAL_INT(0, parse_string_int(buffer_1));
+
+  char buffer_2[] = { '4', '\0', '\0', '\0', '\0'};
+  TEST_ASSERT_EQUAL_INT(4, parse_string_int(buffer_2));
+
+  char buffer_3[] = { '1', '0', '\0', '\0', '\0'};
+  TEST_ASSERT_EQUAL_INT(10, parse_string_int(buffer_3));
+
+  char buffer_4[] = { '2', '1', '\0', '\0', '\0'};
+  TEST_ASSERT_EQUAL_INT(21, parse_string_int(buffer_4));
+
+  char buffer_5[] = { '1', '0', '0', '\0', '\0'};
+  TEST_ASSERT_EQUAL_INT(100, parse_string_int(buffer_5));
+
+  char buffer_6[] = { '1', '3', '2', '\0', '\0'};
+  TEST_ASSERT_EQUAL_INT(132, parse_string_int(buffer_6));
+
+  char buffer_7[] = { '1', '0', '0', '0', '\0'};
+  TEST_ASSERT_EQUAL_INT(1000, parse_string_int(buffer_7));
+
+  char buffer_8[] = { '1', '3', '2', '0', '\0'};
+  TEST_ASSERT_EQUAL_INT(1320, parse_string_int(buffer_8));
+}
+
 void test_parse_piece_char(void) {
   U64 expected[2][6] = { {0} };
   U64 actual[2][6] = { {0} };
@@ -145,10 +171,39 @@ void test_parse_piece_char(void) {
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 }
 
+void test_parse_square(void) {
+  char* square;
+  square = "a8";
+  TEST_ASSERT_EQUAL_INT(A8, parse_square(square));
+
+  square = "b2";
+  TEST_ASSERT_EQUAL_INT(B2, parse_square(square));
+
+  square = "c4";
+  TEST_ASSERT_EQUAL_INT(C4, parse_square(square));
+
+  square = "g3";
+  TEST_ASSERT_EQUAL_INT(G3, parse_square(square));
+
+  square = "e6";
+  TEST_ASSERT_EQUAL_INT(E6, parse_square(square));
+
+  square = "d5";
+  TEST_ASSERT_EQUAL_INT(D5, parse_square(square));
+
+  square = "f7";
+  TEST_ASSERT_EQUAL_INT(F7, parse_square(square));
+
+  square = "h1";
+  TEST_ASSERT_EQUAL_INT(H1, parse_square(square));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_side_to_move);
   RUN_TEST(test_castling_rights);
   RUN_TEST(test_parse_piece_char);
+  RUN_TEST(test_parse_string_int);
+  RUN_TEST(test_parse_square);
   return UNITY_END();
 }

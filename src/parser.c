@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 #include "defs.h"
 #include "bitboard.h"
+#include "board.h"
 
 side_t parse_side_to_move(const char string) {
   if(string == 'w')
@@ -48,3 +50,39 @@ void parse_piece_char(U64 bb_arr[2][6], char piece, int square) {
   bb_arr[side_idx][piece_idx] = set_bit(square, bb_arr[side_idx][piece_idx]);
 
 }
+
+int parse_string_int(const char *string) {
+  const char *str_ptr = string;
+  int len = 0;
+  int result = 0;
+  int value = 0;
+  int multiple = 1;
+
+  while(*str_ptr != ' ' && *str_ptr != '\0') {
+    len++;
+    str_ptr++;
+  }
+  str_ptr--;
+
+  for(int i = 0; i < len; i++) {
+    if(*str_ptr >= '0' && *str_ptr <= '9') {
+      value = *str_ptr - 48;
+    }
+    result += value * multiple;
+    multiple *= 10;
+    str_ptr--;
+  }
+
+  return result;
+}
+
+square_t parse_square(const char *string) {
+  int files[] = {
+    ['a'] = 0,['b'] = 1,['c'] = 2,['d'] = 3,['e'] = 4,['f'] = 5,['g'] = 6,['h'] = 7
+  };
+
+  int file = files[*string];
+  int rank = (*(string + 1) - 48);
+  return (8 - rank) * 8 + file;
+}
+
