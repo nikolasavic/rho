@@ -2,7 +2,7 @@
 #include "move.h"
 #include "exits.h"
 
-exit_t validate_move(move_t *move, val_opt_t option) {
+exit_t validate_move(move_t * move, val_opt_t option) {
   if(move->origin < 0 || move->origin > 63) {
     if(option == VERBOSE) {
       printf("Error: invalid origin square: %d\n", move->origin);
@@ -24,8 +24,8 @@ exit_t validate_move(move_t *move, val_opt_t option) {
     return FAIL;
   }
 
-  if(move->capture &&
-      (move->quiet_move || move->double_pawn || move->kingside_castle || move-> queenside_castle)) {
+  if(move->capture && (move->quiet_move || move->double_pawn ||
+                       move->kingside_castle || move->queenside_castle)) {
     if(option == VERBOSE) {
       printf("Error: capture flag on a quiet move: %d\n", move->promotion);
     }
@@ -35,10 +35,10 @@ exit_t validate_move(move_t *move, val_opt_t option) {
   return SUCCESS;
 }
 
-U16 encode_move(move_t *move) {
+U16 encode_move(move_t * move) {
   return 0;
 }
 
-exit_t decode_move(move_t *move, U16 encoded) {
+exit_t decode_move(move_t * move, U16 encoded) {
   return FAIL;
 }
