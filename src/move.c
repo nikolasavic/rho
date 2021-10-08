@@ -1,8 +1,7 @@
 #include "move.h"
 #include "exits.h"
 
-exit_t validate_move(move_t *move) {
-
+exit_t validate_move(move_t *move, val_opt_t option) {
   return FAIL;
 }
 

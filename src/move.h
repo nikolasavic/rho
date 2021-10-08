@@ -20,8 +20,8 @@ typedef struct move_s {
   bool queenside_castle;
 } move_t;
 
-exit_t validate_move(move_t *move);
-U16 encode_move(move_t *move);
-exit_t decode_move(move_t *move, U16 encoded);
+exit_t validate_move(move_t *, val_opt_t);
+U16 encode_move(move_t *);
+exit_t decode_move(move_t *, U16);
 
 #endif
