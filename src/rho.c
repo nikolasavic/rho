@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "defs.h"
 #include "bitboard.h"
 #include "masks.h"
 

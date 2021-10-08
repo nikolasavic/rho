@@ -7,6 +7,8 @@
 
 #define pop_bit(square, bitboard) ((bitboard & (1ULL << square)) ? bitboard ^= (1ULL << square) : 0)
 
+typedef unsigned long long U64;
+
 void print_bitboard(U64 bb);
 int pop_count(U64 bb);
 

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "defs.h"
 #include "bitboard.h"
 
 void print_bitboard(U64 bitboard) {

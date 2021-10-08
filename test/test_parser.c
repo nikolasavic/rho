@@ -1,5 +1,4 @@
 #include <string.h>
-#include "../src/defs.h"
 #include "../src/parser.h"
 #include "../src/board.h"
 #include "../unity/unity.h"

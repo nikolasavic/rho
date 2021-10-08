@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include "defs.h"
 #include "bitboard.h"
 #include "board.h"
 #include "parser.h"

@@ -1,7 +1,6 @@
 #ifndef MASKS_H
 #define MASKS_H
 
-#include "defs.h"
 #include "board.h"
 
 U64 pawn_attack_mask(int square, int side);

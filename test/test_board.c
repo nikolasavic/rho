@@ -1,4 +1,3 @@
-#include "../src/defs.h"
 #include "../src/board.h"
 #include "../unity/unity.h"
 

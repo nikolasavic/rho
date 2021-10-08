@@ -1,7 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "defs.h"
+#include "bitboard.h"
 #include "exits.h"
 #include "options.h"
 
@@ -15,6 +15,8 @@ typedef enum {
   A2, B2, C2, D2, E2, F2, G2, H2,
   A1, B1, C1, D1, E1, F1, G1, H1, NULL_SQ
 } square_t;
+
+typedef unsigned char castle_t;
 
 typedef enum {
   WHITE, BLACK, NULL_SIDE
