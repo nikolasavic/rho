@@ -23,8 +23,7 @@ typedef enum {
 } side_t;
 
 typedef enum piece_e {
-  P, B, N, R, Q, K,
-  p, b, n, r, q, k
+  P, B, N, R, Q, K, NULL_P
 } piece_t;
 
 typedef struct board_s {
