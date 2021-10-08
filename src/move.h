@@ -13,6 +13,7 @@ typedef struct move_s {
   square_t target;
   piece_t promotion;
   bool quiet_move;
+  bool double_pawn;
   bool capture;
   bool ep_capture;
   bool kingside_castle;
