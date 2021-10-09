@@ -121,11 +121,35 @@ void test_empty_board_is_invalid(void) {
   TEST_ASSERT_EQUAL_INT(FAIL, validate_board(&board, SILENT));
 }
 
+void test_square_to_rank(void) {
+  TEST_ASSERT_EQUAL_INT(0, square_to_rank[A1]);
+  TEST_ASSERT_EQUAL_INT(1, square_to_rank[C2]);
+  TEST_ASSERT_EQUAL_INT(2, square_to_rank[D3]);
+  TEST_ASSERT_EQUAL_INT(3, square_to_rank[E4]);
+  TEST_ASSERT_EQUAL_INT(4, square_to_rank[G5]);
+  TEST_ASSERT_EQUAL_INT(5, square_to_rank[B6]);
+  TEST_ASSERT_EQUAL_INT(6, square_to_rank[H7]);
+  TEST_ASSERT_EQUAL_INT(7, square_to_rank[F8]);
+}
+
+void test_square_to_file(void) {
+  TEST_ASSERT_EQUAL_INT(0, square_to_file[A2]);
+  TEST_ASSERT_EQUAL_INT(1, square_to_file[B5]);
+  TEST_ASSERT_EQUAL_INT(2, square_to_file[C1]);
+  TEST_ASSERT_EQUAL_INT(3, square_to_file[D6]);
+  TEST_ASSERT_EQUAL_INT(4, square_to_file[E4]);
+  TEST_ASSERT_EQUAL_INT(5, square_to_file[F7]);
+  TEST_ASSERT_EQUAL_INT(6, square_to_file[G3]);
+  TEST_ASSERT_EQUAL_INT(7, square_to_file[H8]);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_square_names);
   RUN_TEST(test_empty_board);
   RUN_TEST(test_validate_board);
   RUN_TEST(test_empty_board_is_invalid);
+  RUN_TEST(test_square_to_rank);
+  RUN_TEST(test_square_to_file);
   return UNITY_END();
 }
