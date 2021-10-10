@@ -44,9 +44,46 @@ exit_t validate_move(move_t * move, val_opt_t option) {
 }
 
 U16 encode_move(move_t * move) {
-  return 0;
+  U16 result = 0;
+  // Encode squares
+  result |= square_to_rank[move->origin] << 13;
+  result |= square_to_file[move->origin] << 10;
+  result |= square_to_rank[move->target] << 7;
+  result |= square_to_file[move->target] << 4;
+
+  // Encode flags
+  // WIP
+
+  return result;
 }
 
 exit_t decode_move(move_t * move, U16 encoded) {
-  return FAIL;
+  if(!validate_move(move, SILENT)){
+    return FAIL;
+  }
+
+  // Decode flags
+  // WIP
+  if((encoded & 15) == 0) {
+    move->quiet_move = true;
+  }
+
+  // Decode squares
+  encoded = encoded >> 4;
+  int file_targ = encoded & 7;
+  int rank_targ = (encoded >> 3) & 7;
+  int file_orig = (encoded >> 6) & 7;
+  int rank_orig = (encoded >> 9) & 7;
+  move->origin = 8 * (7 - rank_orig) + file_orig;
+  move->target = 8 * (7 - rank_targ) + file_targ;
+
+  return SUCCESS;
+}
+
+void print_move(move_t * move) {
+  printf("%s->%s prom:%d, capt:%d, quiet:%d double:%d, king:%d, queen:%d\n",
+      square_name[move->origin], square_name[move->target],
+      move->promotion, move->capture, move->quiet_move,
+      move->double_pawn, move->kingside_castle, move->queenside_castle);
+
 }
