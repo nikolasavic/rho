@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "move.h"
+#include "board.h"
 #include "exits.h"
 
 exit_t validate_move(move_t * move, val_opt_t option) {
@@ -13,6 +14,13 @@ exit_t validate_move(move_t * move, val_opt_t option) {
   if(move->target < 0 || move->target > 63) {
     if(option == VERBOSE) {
       printf("Error: invalid target square: %d\n", move->target);
+    }
+    return FAIL;
+  }
+
+  if(move->origin == move->target) {
+    if(option == VERBOSE) {
+      printf("Error: origin and target squares equal: %d\n", move->target);
     }
     return FAIL;
   }

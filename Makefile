@@ -23,7 +23,7 @@ test_parser:
 
 test_move:
 	mkdir -p build/test
-	gcc test/test_move.c src/move.c unity/unity.c -o build/test/test_move
+	gcc test/test_move.c src/move.c src/board.c unity/unity.c -o build/test/test_move
 	./build/test/test_move
 
 clean:
