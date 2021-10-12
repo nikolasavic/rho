@@ -52,22 +52,85 @@ U16 encode_move(move_t * move) {
   result |= square_to_file[move->target] << 4;
 
   // Encode flags
-  // WIP
+  int promotion_flag = move->promotion > 0 && move->promotion < 6;
+  int capture_flag = move->capture ? 1 : 0;
+  int aux_x_flag = 0;
+  int aux_y_flag = 0;
+
+  if(move->kingside_castle) {
+    aux_x_flag = 1;
+  }
+
+  if(move->queenside_castle) {
+    aux_x_flag = 1;
+    aux_y_flag = 1;
+  }
+
+  if(move->ep_capture) {
+    capture_flag = 1;
+    aux_y_flag = 1;
+  }
+
+  if(move->promotion == Q) {
+    aux_x_flag = 1;
+    aux_y_flag = 1;
+  }
+
+  if(move->promotion == R) {
+    aux_x_flag = 1;
+  }
+
+  if(move->promotion == N) {
+    aux_x_flag = 0;
+    aux_y_flag = 0;
+  }
+
+  if(move->promotion == B) {
+    aux_y_flag = 1;
+  }
+
+  result |= promotion_flag << 3;
+  result |= capture_flag << 2;
+  result |= aux_x_flag << 1;
+  result |= aux_y_flag;
 
   return result;
 }
 
 exit_t decode_move(move_t * move, U16 encoded) {
-  if(!validate_move(move, SILENT)){
+  if(!validate_move(move, SILENT)) {
     return FAIL;
   }
-
   // Decode flags
-  // WIP
-  if((encoded & 15) == 0) {
-    move->quiet_move = true;
-  }
+  int promotion_flag = encoded & 8 ? 1 : 0;
+  int capture_flag = encoded & 4 ? 1 : 0;
+  int aux_x_flag = encoded & 2 ? 1 : 0;
+  int aux_y_flag = encoded & 1 ? 1 : 0;
 
+  move->quiet_move =
+    !(promotion_flag & capture_flag & aux_x_flag & aux_y_flag);
+  move->double_pawn =
+    !(promotion_flag & capture_flag & aux_x_flag & !aux_y_flag);
+  move->capture = capture_flag;
+  move->ep_capture =
+    !(promotion_flag & !capture_flag & aux_x_flag & !aux_y_flag);
+  move->kingside_castle =
+    !(promotion_flag & capture_flag & !aux_x_flag & aux_y_flag);
+  move->queenside_castle =
+    !(promotion_flag & capture_flag & !aux_x_flag & !aux_y_flag);
+
+  if(promotion_flag) {
+    if(aux_x_flag && aux_y_flag) {
+      move->promotion = Q;
+    } else if(aux_x_flag && !aux_y_flag) {
+      move->promotion = R;
+    } else if(!aux_x_flag && aux_y_flag) {
+      move->promotion = B;
+    } else if(!aux_x_flag && !aux_y_flag) {
+      move->promotion = N;
+    }
+
+  }
   // Decode squares
   encoded = encoded >> 4;
   int file_targ = encoded & 7;
@@ -82,8 +145,8 @@ exit_t decode_move(move_t * move, U16 encoded) {
 
 void print_move(move_t * move) {
   printf("%s->%s prom:%d, capt:%d, quiet:%d double:%d, king:%d, queen:%d\n",
-      square_name[move->origin], square_name[move->target],
-      move->promotion, move->capture, move->quiet_move,
-      move->double_pawn, move->kingside_castle, move->queenside_castle);
+         square_name[move->origin], square_name[move->target],
+         move->promotion, move->capture, move->quiet_move,
+         move->double_pawn, move->kingside_castle, move->queenside_castle);
 
 }

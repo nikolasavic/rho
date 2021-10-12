@@ -1,3 +1,4 @@
+#include <string.h>
 #include "../src/move.h"
 #include "../unity/unity.h"
 
@@ -41,7 +42,7 @@ void test_empty_move(void) {
   TEST_ASSERT_EQUAL_INT(false, move.queenside_castle);
 }
 
-void test_encode_decode(void) {
+void test_encode_decode_squares(void) {
   move_t move = { 0 };
   move_t decoded = { 0 };
   U16 encoded;
@@ -75,11 +76,153 @@ void test_encode_decode(void) {
   TEST_ASSERT_EQUAL_INT(E7, decoded.target);
 }
 
+void test_encode_decode_flags(void) {
+  move_t move = { 0 };
+  move_t decoded = { 0 };
+  U16 encoded;
+
+  move.quiet_move = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(true, decoded.quiet_move);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.double_pawn = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(true, decoded.double_pawn);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.capture = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(true, decoded.capture);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.ep_capture = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(true, decoded.ep_capture);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.kingside_castle = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(true, decoded.kingside_castle);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.queenside_castle = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(true, decoded.queenside_castle);
+}
+
+void test_encode_decode_promotions(void) {
+  move_t move = { 0 };
+  move_t decoded = { 0 };
+  U16 encoded;
+
+  move.promotion = Q;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(Q, decoded.promotion);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.promotion = R;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(R, decoded.promotion);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.promotion = N;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(N, decoded.promotion);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.promotion = B;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(B, decoded.promotion);
+}
+
+void test_encode_decode_moves(void) {
+  move_t move = { 0 };
+  move_t decoded = { 0 };
+  U16 encoded;
+
+  move.origin = A7;
+  move.target = C8;
+  move.capture = true;
+  move.promotion = Q;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(A7, decoded.origin);
+  TEST_ASSERT_EQUAL_INT(C8, decoded.target);
+  TEST_ASSERT_EQUAL_INT(true, decoded.capture);
+  TEST_ASSERT_EQUAL_INT(Q, decoded.promotion);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.origin = E1;
+  move.target = C1;
+  move.kingside_castle = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(E1, decoded.origin);
+  TEST_ASSERT_EQUAL_INT(C1, decoded.target);
+  TEST_ASSERT_EQUAL_INT(true, decoded.queenside_castle);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.origin = F7;
+  move.target = F5;
+  move.double_pawn = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(F7, decoded.origin);
+  TEST_ASSERT_EQUAL_INT(F5, decoded.target);
+  TEST_ASSERT_EQUAL_INT(true, decoded.double_pawn);
+
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
+  encoded = 0;
+  move.origin = E5;
+  move.target = D6;
+  move.ep_capture = true;
+  encoded = encode_move(&move);
+  decode_move(&decoded, encoded);
+  TEST_ASSERT_EQUAL_INT(E5, decoded.origin);
+  TEST_ASSERT_EQUAL_INT(D6, decoded.target);
+  TEST_ASSERT_EQUAL_INT(true, decoded.ep_capture);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_validate_move);
   RUN_TEST(test_empty_move_is_invalid);
   RUN_TEST(test_empty_move);
-  RUN_TEST(test_encode_decode);
+  RUN_TEST(test_encode_decode_squares);
+  RUN_TEST(test_encode_decode_flags);
+  RUN_TEST(test_encode_decode_promotions);
+  RUN_TEST(test_encode_decode_moves);
   return UNITY_END();
 }
