@@ -4,14 +4,14 @@
 #include "exits.h"
 
 exit_t validate_move(move_t * move, val_opt_t option) {
-  if(move->origin < 0 || move->origin > 63) {
+  if(move->origin < A8 || move->origin > H1) {
     if(option == VERBOSE) {
       printf("Error: invalid origin square: %d\n", move->origin);
     }
     return FAIL;
   }
 
-  if(move->target < 0 || move->target > 63) {
+  if(move->target < A8 || move->target > H1) {
     if(option == VERBOSE) {
       printf("Error: invalid target square: %d\n", move->target);
     }
@@ -25,7 +25,7 @@ exit_t validate_move(move_t * move, val_opt_t option) {
     return FAIL;
   }
 
-  if(move->promotion < 1 || move->promotion > 6) {
+  if(move->promotion < B || move->promotion > NULL_P) {
     if(option == VERBOSE) {
       printf("Error: invalid promotion piece: %d\n", move->promotion);
     }

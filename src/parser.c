@@ -36,8 +36,10 @@ castle_t parse_castling_rights(const char *string) {
 
 void parse_piece_char(U64 bb_arr[2][6], char piece, int square) {
   int side_lookup[] = {
-    ['P'] = WHITE,['B'] = WHITE,['N'] = WHITE,['R'] = WHITE,['Q'] = WHITE,['K'] = WHITE,
-    ['p'] = BLACK,['b'] = BLACK,['n'] = BLACK,['r'] = BLACK,['q'] = BLACK,['k'] = BLACK
+    ['P'] = WHITE,['B'] = WHITE,['N'] = WHITE,['R'] = WHITE,
+    ['Q'] = WHITE,['K'] = WHITE,
+    ['p'] = BLACK,['b'] = BLACK,['n'] = BLACK,['r'] = BLACK,
+    ['q'] = BLACK,['k'] = BLACK
   };
   int piece_lookup[] = {
     ['P'] = P,['B'] = B,['N'] = N,['R'] = R,['Q'] = Q,['K'] = K,
@@ -78,7 +80,8 @@ int parse_string_int(const char *string) {
 
 square_t parse_square(const char *string) {
   int files[] = {
-    ['a'] = 0,['b'] = 1,['c'] = 2,['d'] = 3,['e'] = 4,['f'] = 5,['g'] = 6,['h'] = 7
+    ['a'] = 0,['b'] = 1,['c'] = 2,['d'] = 3,
+    ['e'] = 4,['f'] = 5,['g'] = 6,['h'] = 7
   };
 
   int file = files[*string];

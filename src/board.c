@@ -38,11 +38,14 @@ int square_to_file[] = {
   0, 1, 2, 3, 4, 5, 6, 7,
 };
 
-char *piece_unicode[] =
-  { "♙", "♗", "♘", "♖", "♕", "♔", "♟︎", "♝", "♞", "♜", "♛", "♚" };
+char *piece_unicode[] = {
+  "♙", "♗", "♘", "♖", "♕", "♔",
+  "♟︎", "♝", "♞", "♜", "♛", "♚"
+};
 
-char *piece_ascii[] =
-  { "P", "B", "N", "R", "Q", "K", "p", "b", "n", "r", "q", "k" };
+char *piece_ascii[] = {
+  "P", "B", "N", "R", "Q", "K", "p", "b", "n", "r", "q", "k"
+};
 
 exit_t validate_board(board_t * board, val_opt_t option) {
   if(board->half_move_clock < 0) {
