@@ -85,8 +85,8 @@ square_t parse_square(const char *string) {
   };
 
   int file = files[*string];
-  int rank = (*(string + 1) - 48);
-  return (8 - rank) * 8 + file;
+  int rank = (*(string + 1) - 48) - 1;
+  return rank * 8 + file;
 }
 
 exit_t parse_fen(board_t * board, const char *fen) {

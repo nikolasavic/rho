@@ -32,8 +32,8 @@ void test_empty_move_is_invalid(void) {
 void test_empty_move(void) {
   move_t move = { 0 };
 
-  TEST_ASSERT_EQUAL_INT(A8, move.origin);
-  TEST_ASSERT_EQUAL_INT(A8, move.target);
+  TEST_ASSERT_EQUAL_INT(A1, move.origin);
+  TEST_ASSERT_EQUAL_INT(A1, move.target);
   TEST_ASSERT_EQUAL_INT(P, move.promotion);
   TEST_ASSERT_EQUAL_INT(false, move.quiet_move);
   TEST_ASSERT_EQUAL_INT(false, move.double_pawn);

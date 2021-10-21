@@ -80,12 +80,15 @@ void test_parse_string_int(void) {
 void test_parse_piece_char(void) {
   U64 expected[2][6] = { {0} };
   U64 actual[2][6] = { {0} };
+  U64 expected_bb = 0ULL;
   square_t square;
   char piece;
 
   piece = 'P';
   square = D6;
-  expected[WHITE][P] = 524288ULL;
+  set_bit(D6, expected_bb);
+  expected[WHITE][P] = expected_bb;
+
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -93,7 +96,9 @@ void test_parse_piece_char(void) {
   square = C2;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[WHITE][B] = 1125899906842624ULL;
+  expected_bb = 0ULL;
+  set_bit(C2, expected_bb);
+  expected[WHITE][B] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -101,7 +106,9 @@ void test_parse_piece_char(void) {
   square = F4;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[WHITE][N] = 137438953472ULL;
+  expected_bb = 0ULL;
+  set_bit(F4, expected_bb);
+  expected[WHITE][N] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -109,7 +116,9 @@ void test_parse_piece_char(void) {
   square = E4;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[WHITE][Q] = 68719476736ULL;
+  expected_bb = 0ULL;
+  set_bit(E4, expected_bb);
+  expected[WHITE][Q] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -117,7 +126,9 @@ void test_parse_piece_char(void) {
   square = H5;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[WHITE][K] = 2147483648ULL;
+  expected_bb = 0ULL;
+  set_bit(H5, expected_bb);
+  expected[WHITE][K] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -125,7 +136,9 @@ void test_parse_piece_char(void) {
   square = G4;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[BLACK][P] = 274877906944ULL;
+  expected_bb = 0ULL;
+  set_bit(G4, expected_bb);
+  expected[BLACK][P] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -133,7 +146,9 @@ void test_parse_piece_char(void) {
   square = H8;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[BLACK][B] = 128ULL;
+  expected_bb = 0ULL;
+  set_bit(H8, expected_bb);
+  expected[BLACK][B] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -141,7 +156,9 @@ void test_parse_piece_char(void) {
   square = C7;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[BLACK][N] = 1024ULL;
+  expected_bb = 0ULL;
+  set_bit(C7, expected_bb);
+  expected[BLACK][N] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -149,7 +166,9 @@ void test_parse_piece_char(void) {
   square = B8;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[BLACK][R] = 2ULL;
+  expected_bb = 0ULL;
+  set_bit(B8, expected_bb);
+  expected[BLACK][R] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -157,7 +176,9 @@ void test_parse_piece_char(void) {
   square = A5;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[BLACK][Q] = 16777216ULL;
+  expected_bb = 0ULL;
+  set_bit(A5, expected_bb);
+  expected[BLACK][Q] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 
@@ -165,7 +186,9 @@ void test_parse_piece_char(void) {
   square = A2;
   memset(actual, 0, sizeof(expected));
   memset(expected, 0, sizeof(expected));
-  expected[BLACK][K] = 281474976710656ULL;
+  expected_bb = 0ULL;
+  set_bit(A2, expected_bb);
+  expected[BLACK][K] = expected_bb;
   parse_piece_char(actual, piece, square);
   TEST_ASSERT_EQUAL_UINT64_ARRAY(expected, actual, 12);
 }

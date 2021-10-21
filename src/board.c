@@ -6,25 +6,25 @@
 int piece_identity(int square, board_t * board);
 
 char *square_name[] = {
-  "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
-  "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
-  "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6",
-  "a5", "b5", "c5", "d5", "e5", "f5", "g5", "h5",
-  "a4", "b4", "c4", "d4", "e4", "f4", "g4", "h4",
-  "a3", "b3", "c3", "d3", "e3", "f3", "g3", "h3",
+  "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1",
   "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2",
-  "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1", "null"
+  "a3", "b3", "c3", "d3", "e3", "f3", "g3", "h3",
+  "a4", "b4", "c4", "d4", "e4", "f4", "g4", "h4",
+  "a5", "b5", "c5", "d5", "e5", "f5", "g5", "h5",
+  "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6",
+  "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
+  "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8", "null"
 };
 
 int square_to_rank[] = {
-  7, 7, 7, 7, 7, 7, 7, 7,
-  6, 6, 6, 6, 6, 6, 6, 6,
-  5, 5, 5, 5, 5, 5, 5, 5,
-  4, 4, 4, 4, 4, 4, 4, 4,
-  3, 3, 3, 3, 3, 3, 3, 3,
-  2, 2, 2, 2, 2, 2, 2, 2,
-  1, 1, 1, 1, 1, 1, 1, 1,
   0, 0, 0, 0, 0, 0, 0, 0,
+  1, 1, 1, 1, 1, 1, 1, 1,
+  2, 2, 2, 2, 2, 2, 2, 2,
+  3, 3, 3, 3, 3, 3, 3, 3,
+  4, 4, 4, 4, 4, 4, 4, 4,
+  5, 5, 5, 5, 5, 5, 5, 5,
+  6, 6, 6, 6, 6, 6, 6, 6,
+  7, 7, 7, 7, 7, 7, 7, 7,
 };
 
 int square_to_file[] = {
@@ -39,8 +39,8 @@ int square_to_file[] = {
 };
 
 char *piece_unicode[] = {
+  "♟︎", "♝", "♞", "♜", "♛", "♚",
   "♙", "♗", "♘", "♖", "♕", "♔",
-  "♟︎", "♝", "♞", "♜", "♛", "♚"
 };
 
 char *piece_ascii[] = {
@@ -120,8 +120,8 @@ void print_board(board_t * board) {
   char side_to_move = board->side_to_move == 0 ? 'w' : 'b';
   int piece_idx;
   printf("\n");
-  for(int rank = 1; rank <= 8; rank++) {
-    printf("%d  ", 9 - rank);
+  for(int rank = 8; rank >= 1; rank--) {
+    printf("%d  ", rank);
     for(int file = 1; file <= 8; file++) {
       int square = (file - 1) + (rank - 1) * 8;
       piece_idx = piece_identity(square, board);
