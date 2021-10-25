@@ -13,7 +13,7 @@ const U64 RANK_8 = 18374686479671623680ULL;;
 const U64 RANK_18 = 18374686479671623935ULL;
 const U64 RANK_78 = 18446462598732840960ULL;
 
-U64 pawn_attack_mask(int square, int side) {
+U64 pawn_attack_mask(square_t square, side_t side) {
   U64 bb = 0ULL;
 
   if(square < A2 || square > H7)
@@ -42,7 +42,7 @@ U64 pawn_attack_mask(int square, int side) {
   return bb;
 }
 
-U64 pawn_motion_mask(int square, int side) {
+U64 pawn_motion_mask(square_t square, side_t side) {
   U64 bb = 0ULL;
   if(get_bit(square, RANK_18))
     return 0ULL;
@@ -66,7 +66,7 @@ U64 pawn_motion_mask(int square, int side) {
   return bb;
 }
 
-U64 king_attack_mask(int square) {
+U64 king_attack_mask(square_t square) {
   U64 bb = 0ULL;
   if(!get_bit(square, RANK_8))
     set_bit((square + 8), bb);
@@ -88,7 +88,7 @@ U64 king_attack_mask(int square) {
   return bb;
 }
 
-U64 knight_attack_mask(int square) {
+U64 knight_attack_mask(square_t square) {
   U64 bb = 0ULL;
   if(!get_bit(square, RANK_78) && !get_bit(square, FILE_H))
     set_bit((square + 17), bb);
@@ -110,7 +110,7 @@ U64 knight_attack_mask(int square) {
   return bb;
 }
 
-U64 bishop_attack_mask(int square, U64 block) {
+U64 bishop_attack_mask(square_t square, U64 block) {
   U64 bb = 0ULL;
   int target;
 
@@ -153,7 +153,7 @@ U64 bishop_attack_mask(int square, U64 block) {
   return bb;
 }
 
-U64 rook_attack_mask(int square, U64 block) {
+U64 rook_attack_mask(square_t square, U64 block) {
   U64 bb = 0ULL;
   int target;
 
