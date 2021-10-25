@@ -9,7 +9,8 @@
 
 typedef unsigned long long U64;
 
-void print_bitboard(U64 bb);
-int pop_count(U64 bb);
+void print_bitboard(U64);
+int pop_count(U64);
+int bitscan_fwd(U64);
 
 #endif
