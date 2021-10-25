@@ -22,7 +22,7 @@ typedef enum {
   WHITE, BLACK, NULL_SIDE
 } side_t;
 
-typedef enum piece_e {
+typedef enum {
   P, B, N, R, Q, K, NULL_P
 } piece_t;
 
