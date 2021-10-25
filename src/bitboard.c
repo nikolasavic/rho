@@ -24,7 +24,7 @@ int pop_count(U64 bb) {
   return count;
 }
 
-const int index64[64] = {
+const int fwd_lookup[64] = {
   0, 1, 48, 2, 57, 49, 28, 3,
   61, 58, 50, 42, 38, 29, 17, 4,
   62, 55, 59, 36, 53, 51, 43, 22,
@@ -37,5 +37,29 @@ const int index64[64] = {
 
 int bitscan_fwd(U64 bb) {
   const U64 debruijn64 = 0x03f79d71b4cb0a89ULL;
-  return index64[((bb & -bb) * debruijn64) >> 58];
+  return fwd_lookup[((bb & -bb) * debruijn64) >> 58];
+}
+
+const int rev_lookup[64] = {
+  0, 47, 1, 56, 48, 27, 2, 60,
+  57, 49, 41, 37, 28, 16, 3, 61,
+  54, 58, 35, 52, 50, 42, 21, 44,
+  38, 32, 29, 23, 17, 11, 4, 62,
+  46, 55, 26, 59, 40, 36, 15, 53,
+  34, 51, 20, 43, 31, 22, 10, 45,
+  25, 39, 14, 33, 19, 30, 9, 24,
+  13, 18, 8, 12, 7, 6, 5, 63
+};
+
+int bitscan_rev(U64 bb) {
+  const U64 debruijn64 = 0x03f79d71b4cb0a89ULL;
+
+  bb |= bb >> 1;
+  bb |= bb >> 2;
+  bb |= bb >> 4;
+  bb |= bb >> 8;
+  bb |= bb >> 16;
+  bb |= bb >> 32;
+
+  return rev_lookup[(bb * debruijn64) >> 58];
 }
