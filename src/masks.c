@@ -195,3 +195,91 @@ U64 rook_attack_mask(square_t square, U64 block) {
 
   return bb;
 }
+
+U64 ray_north(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, RANK_8)) {
+    square += 8;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}
+
+U64 ray_north_east(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, RANK_8) && !get_bit(square, FILE_H)) {
+    square += 9;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}
+
+U64 ray_east(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, FILE_H)) {
+    square += 1;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}
+
+U64 ray_south_east(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, FILE_H) && !get_bit(square, RANK_1)) {
+    square -= 7;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}
+
+U64 ray_south(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, RANK_1)) {
+    square -= 8;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}
+
+U64 ray_south_west(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, FILE_A) && !get_bit(square, RANK_1)) {
+    square -= 9;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}
+
+U64 ray_west(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, FILE_A)) {
+    square -= 1;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}
+
+U64 ray_north_west(square_t square) {
+  U64 ray = 0ULL;
+
+  while(!get_bit(square, FILE_A) && !get_bit(square, RANK_8)) {
+    square += 7;
+    set_bit(square, ray);
+  }
+
+  return ray;
+}

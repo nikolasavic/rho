@@ -31,7 +31,6 @@ void test_pawn_attack_mask(void) {
 
   expected = 0ULL;
   set_bit(B6, expected);
-  print_bitboard(pawn_attack_mask(A7, BLACK));
   TEST_ASSERT_EQUAL_INT(expected, pawn_attack_mask(A7, BLACK));
 
   expected = 0ULL;
@@ -436,6 +435,173 @@ void test_rook_attack_mask_with_block(void) {
   TEST_ASSERT_EQUAL_INT(expected, actual);
 }
 
+void test_ray_north(void) {
+  U64 expected = 0ULL;
+
+  expected = 72057594037927936ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north(A7));
+
+  expected = 144680345676153344ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north(B1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north(D8));
+
+  expected = 1157442765139738624ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north(E4));
+
+  expected = 9259542123265392640ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north(H3));
+}
+
+void test_ray_north_east() {
+  U64 expected = 0ULL;
+
+  expected = 144115188075855872ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(A7));
+
+  expected = 4620710844295020544ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(B3));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(A8));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(D8));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(H2));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(H8));
+
+  expected = 141012903133184ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(E3));
+
+  expected = 144115188075855872ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_east(A7));
+}
+
+void test_ray_east() {
+  U64 expected = 0ULL;
+
+  expected = 69805794224242688ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_east(C7));
+
+  expected = 17293822569102704640ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_east(D8));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_east(H6));
+
+  expected = 32768ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_east(G2));
+
+  expected = 192ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_east(F1));
+}
+
+void test_ray_south_east() {
+  U64 expected = 0ULL;
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_east(A1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_east(H1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_east(D1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_east(H8));
+
+  expected = 2216338399296ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_east(A7));
+
+  expected = 277025390592ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_east(F6));
+}
+
+void test_ray_south() {
+  U64 expected = 0ULL;
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south(A1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south(C1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south(H1));
+
+  expected = 275955859520ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south(G6));
+}
+
+void test_ray_south_west() {
+  U64 expected = 0ULL;
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_west(A4));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_west(A1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_west(F1));
+
+  expected = 34426978560ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_west(E6));
+
+  expected = 1ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_west(B2));
+
+  expected = 268960770ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_south_west(F5));
+}
+
+void test_ray_west() {
+  U64 expected = 0ULL;
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_west(A4));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_west(A1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_west(A8));
+
+  expected = 16492674416640ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_west(E6));
+
+  expected = 196608ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_west(C3));
+}
+
+void test_ray_north_west() {
+  U64 expected = 0ULL;
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_west(C8));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_west(A5));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_west(A1));
+
+  expected = 0ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_west(A8));
+
+  expected = 580964351930793984ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_west(F6));
+
+  expected = 1108168671232ULL;
+  TEST_ASSERT_EQUAL_INT(expected, ray_north_west(D3));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_pawn_attack_mask);
@@ -446,5 +612,13 @@ int main(void) {
   RUN_TEST(test_bishop_attack_mask_with_block);
   RUN_TEST(test_rook_attack_mask);
   RUN_TEST(test_rook_attack_mask_with_block);
+  RUN_TEST(test_ray_north);
+  RUN_TEST(test_ray_north_east);
+  RUN_TEST(test_ray_east);
+  RUN_TEST(test_ray_south_east);
+  RUN_TEST(test_ray_south);
+  RUN_TEST(test_ray_south_west);
+  RUN_TEST(test_ray_west);
+  RUN_TEST(test_ray_north_west);
   return UNITY_END();
 }
