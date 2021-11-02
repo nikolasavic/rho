@@ -9,6 +9,12 @@
 
 typedef unsigned long long U64;
 
+typedef enum {
+  NORTH, NO_EAST, EAST, SO_EAST, SOUTH, SO_WEST, WEST, NO_WEST
+} dir_t;
+
+extern U64 rays[8][64];
+
 void print_bitboard(U64);
 int pop_count(U64);
 int bitscan_fwd(U64);

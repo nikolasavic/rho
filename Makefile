@@ -1,5 +1,5 @@
 all:
-	gcc  -o build/rho src/rho.c src/board.c src/bitboard.c src/masks.c
+	gcc  -o build/rho src/rho.c src/board.c src/bitboard.c src/masks.c src/init.c
 
 test_bitboard:
 	mkdir -p build/test
@@ -24,6 +24,11 @@ test_parser:
 test_move:
 	mkdir -p build/test
 	gcc test/test_move.c src/move.c src/board.c unity/unity.c -o build/test/test_move
+	./build/test/test_move
+
+test_init:
+	mkdir -p build/test
+	gcc test/test_init.c src/init.c src/bitboard.c src/masks.c unity/unity.c -o build/test/test_move
 	./build/test/test_move
 
 clean:

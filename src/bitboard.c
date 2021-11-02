@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "bitboard.h"
 
+U64 rays[8][64] = { };
+
 void print_bitboard(U64 bitboard) {
   printf("\n");
   for(int rank = 7; rank >= 0; rank--) {
