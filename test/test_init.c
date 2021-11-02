@@ -24,8 +24,26 @@ void test_init_rays(void) {
   TEST_ASSERT_EQUAL_INT(16777216ULL, rays[NO_WEST][B3]);
 }
 
+void test_king_moves(void) {
+  TEST_ASSERT_EQUAL_INT(0, king_moves[0]);
+
+  init_king_moves();
+
+  TEST_ASSERT_EQUAL_INT(241192927232ULL, king_moves[E4]);
+}
+
+void test_knight_moves(void) {
+  TEST_ASSERT_EQUAL_INT(0, knight_moves[0]);
+
+  init_knight_moves();
+
+  TEST_ASSERT_EQUAL_INT(44272527353856ULL, knight_moves[E4]);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_init_rays);
+  RUN_TEST(test_king_moves);
+  RUN_TEST(test_knight_moves);
   return UNITY_END();
 }

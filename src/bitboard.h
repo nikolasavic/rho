@@ -14,6 +14,8 @@ typedef enum {
 } dir_t;
 
 extern U64 rays[8][64];
+extern U64 king_moves[64];
+extern U64 knight_moves[64];
 
 void print_bitboard(U64);
 int pop_count(U64);

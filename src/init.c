@@ -13,3 +13,15 @@ void init_rays() {
     rays[NO_WEST][i] = ray_north_west(i);
   }
 }
+
+void init_king_moves() {
+  for(int i = 0; i < 64; i++) {
+    king_moves[i] = king_attack_mask(i);
+  }
+}
+
+void init_knight_moves() {
+  for(int i = 0; i < 64; i++) {
+    knight_moves[i] = knight_attack_mask(i);
+  }
+}
