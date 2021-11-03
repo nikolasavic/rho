@@ -40,10 +40,36 @@ void test_knight_moves(void) {
   TEST_ASSERT_EQUAL_INT(44272527353856ULL, knight_moves[E4]);
 }
 
+void test_pawn_moves() {
+  TEST_ASSERT_EQUAL_INT(0, pawn_moves[0][0]);
+
+  init_pawn_moves();
+
+  TEST_ASSERT_EQUAL_INT(269484032ULL, pawn_moves[WHITE][E2]);
+  TEST_ASSERT_EQUAL_INT(17592186044416ULL, pawn_moves[WHITE][E5]);
+  TEST_ASSERT_EQUAL_INT(16ULL, pawn_moves[BLACK][E2]);
+  TEST_ASSERT_EQUAL_INT(141287244169216ULL, pawn_moves[BLACK][H7]);
+}
+
+void test_pawn_attacks() {
+  TEST_ASSERT_EQUAL_INT(0, pawn_attacks[0][0]);
+
+  init_pawn_attacks();
+
+  TEST_ASSERT_EQUAL_INT(0ULL, pawn_attacks[WHITE][C8]);
+  TEST_ASSERT_EQUAL_INT(21474836480ULL, pawn_attacks[WHITE][B4]);
+  TEST_ASSERT_EQUAL_INT(1073741824ULL, pawn_attacks[WHITE][H3]);
+  TEST_ASSERT_EQUAL_INT(0ULL, pawn_attacks[BLACK][A1]);
+  TEST_ASSERT_EQUAL_INT(20ULL, pawn_attacks[BLACK][D2]);
+  TEST_ASSERT_EQUAL_INT(2684354560ULL, pawn_attacks[BLACK][G5]);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_init_rays);
   RUN_TEST(test_king_moves);
   RUN_TEST(test_knight_moves);
+  RUN_TEST(test_pawn_moves);
+  RUN_TEST(test_pawn_attacks);
   return UNITY_END();
 }

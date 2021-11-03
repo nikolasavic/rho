@@ -4,6 +4,8 @@
 U64 rays[8][64] = { };
 U64 king_moves[64] = { };
 U64 knight_moves[64] = { };
+U64 pawn_moves[2][64] = { };
+U64 pawn_attacks[2][64] = { };
 
 void print_bitboard(U64 bitboard) {
   printf("\n");

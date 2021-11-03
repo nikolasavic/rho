@@ -25,3 +25,19 @@ void init_knight_moves() {
     knight_moves[i] = knight_attack_mask(i);
   }
 }
+
+void init_pawn_moves() {
+  for(int side = 0; side < 2; side++) {
+    for(int i = 0; i < 64; i++) {
+      pawn_moves[side][i] = pawn_motion_mask(i, side);
+    }
+  }
+}
+
+void init_pawn_attacks() {
+  for(int side = 0; side < 2; side++) {
+    for(int i = 0; i < 64; i++) {
+      pawn_attacks[side][i] = pawn_attack_mask(i, side);
+    }
+  }
+}
