@@ -54,6 +54,8 @@ void test_encode_decode_squares(void) {
   TEST_ASSERT_EQUAL_INT(A8, decoded.origin);
   TEST_ASSERT_EQUAL_INT(H1, decoded.target);
 
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
   move.origin = H8;
   move.target = A1;
   encoded = encode_move(&move);
@@ -61,6 +63,8 @@ void test_encode_decode_squares(void) {
   TEST_ASSERT_EQUAL_INT(H8, decoded.origin);
   TEST_ASSERT_EQUAL_INT(A1, decoded.target);
 
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
   move.origin = D4;
   move.target = F3;
   encoded = encode_move(&move);
@@ -68,6 +72,8 @@ void test_encode_decode_squares(void) {
   TEST_ASSERT_EQUAL_INT(D4, decoded.origin);
   TEST_ASSERT_EQUAL_INT(F3, decoded.target);
 
+  memset(&move, 0, sizeof(move_t));
+  memset(&decoded, 0, sizeof(move_t));
   move.origin = C2;
   move.target = E7;
   encoded = encode_move(&move);
@@ -183,7 +189,7 @@ void test_encode_decode_moves(void) {
   encoded = 0;
   move.origin = E1;
   move.target = C1;
-  move.kingside_castle = true;
+  move.queenside_castle = true;
   encoded = encode_move(&move);
   decode_move(&decoded, encoded);
   TEST_ASSERT_EQUAL_INT(E1, decoded.origin);
