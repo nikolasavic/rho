@@ -57,34 +57,34 @@ U16 encode_move(move_t * move) {
   int aux_x_flag = 0;
   int aux_y_flag = 0;
 
-  if(move->kingside_castle) {
-    aux_x_flag = 1;
-  }
-
-  if(move->queenside_castle) {
-    aux_x_flag = 1;
-    aux_y_flag = 1;
-  }
-
-  if(move->ep_capture) {
-    capture_flag = 1;
-    aux_y_flag = 1;
-  }
-
-  if(promotion_flag) {
-    if(move->promotion == Q) {
-      aux_x_flag = 1;
-      aux_y_flag = 1;
-    }
-    else if(move->promotion == R) {
-      aux_x_flag = 1;
-    }
-    else if(move->promotion == N) {
+  if(move->quiet_move) {
+  } else {
+    if(move->double_pawn) {
       aux_x_flag = 0;
-      aux_y_flag = 0;
-    }
-    else if(move->promotion == B) {
       aux_y_flag = 1;
+    } else if(move->kingside_castle) {
+      aux_x_flag = 1;
+    } else if(move->queenside_castle) {
+      aux_x_flag = 1;
+      aux_y_flag = 1;
+    } else if(move->ep_capture) {
+      capture_flag = 1;
+      aux_x_flag = 0;
+      aux_y_flag = 1;
+    } else if(promotion_flag) {
+      if(move->promotion == Q) {
+        aux_x_flag = 1;
+        aux_y_flag = 1;
+      } else if(move->promotion == R) {
+        aux_x_flag = 1;
+        aux_y_flag = 0;
+      } else if(move->promotion == N) {
+        aux_x_flag = 0;
+        aux_y_flag = 0;
+      } else if(move->promotion == B) {
+        aux_x_flag = 0;
+        aux_y_flag = 1;
+      }
     }
   }
 
@@ -107,16 +107,21 @@ exit_t decode_move(move_t * move, U16 encoded) {
   int aux_y_flag = encoded & 1 ? 1 : 0;
 
   move->quiet_move =
-    !(promotion_flag & capture_flag & aux_x_flag & aux_y_flag);
+    !promotion_flag & !capture_flag & !aux_x_flag & !aux_y_flag;
+
   move->double_pawn =
-    !(promotion_flag & capture_flag & aux_x_flag & !aux_y_flag);
+    !promotion_flag & !capture_flag & !aux_x_flag & aux_y_flag;
+
   move->capture = capture_flag;
+
   move->ep_capture =
-    !(promotion_flag & !capture_flag & aux_x_flag & !aux_y_flag);
+    !promotion_flag & capture_flag & !aux_x_flag & aux_y_flag;
+
   move->kingside_castle =
-    !(promotion_flag & capture_flag & !aux_x_flag & aux_y_flag);
+    !promotion_flag & !capture_flag & aux_x_flag & !aux_y_flag;
+
   move->queenside_castle =
-    !(promotion_flag & capture_flag & !aux_x_flag & !aux_y_flag);
+    !promotion_flag & !capture_flag & aux_x_flag & aux_y_flag;
 
   if(promotion_flag) {
     if(aux_x_flag && aux_y_flag) {
