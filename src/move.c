@@ -25,7 +25,7 @@ exit_t validate_move(move_t * move, val_opt_t option) {
     return FAIL;
   }
 
-  if(move->promotion < B || move->promotion > NULL_P) {
+  if(move->promotion < P || move->promotion > Q) {
     if(option == VERBOSE) {
       printf("Error: invalid promotion piece: %d\n", move->promotion);
     }

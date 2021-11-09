@@ -9,11 +9,11 @@ void tearDown(void) {
 }
 
 void test_validate_move(void) {
-  move_t move;
+  move_t move = { 0 };
   move.origin = E2;
   move.target = E4;
-  move.promotion = NULL_P;
-  move.quiet_move = true;
+  move.promotion = P;
+  move.quiet_move = false;
   move.double_pawn = true;
   move.capture = false;
   move.ep_capture = false;
@@ -21,6 +21,39 @@ void test_validate_move(void) {
   move.queenside_castle = false;
 
   TEST_ASSERT_EQUAL_INT(SUCCESS, validate_move(&move, SILENT));
+}
+
+void test_validate_move_promotion(void) {
+  move_t move = { 0 };
+  move.origin = E7;
+  move.target = E8;
+
+  move.promotion = P;
+  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_move(&move, SILENT));
+
+  move.promotion = B;
+  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_move(&move, SILENT));
+
+  move.promotion = N;
+  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_move(&move, SILENT));
+
+  move.promotion = R;
+  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_move(&move, SILENT));
+
+  move.promotion = Q;
+  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_move(&move, SILENT));
+
+  move.promotion = K;
+  TEST_ASSERT_EQUAL_INT(FAIL, validate_move(&move, SILENT));
+
+  move.promotion = NULL_P;
+  TEST_ASSERT_EQUAL_INT(FAIL, validate_move(&move, SILENT));
+
+  move.promotion = NULL_P + 1;
+  TEST_ASSERT_EQUAL_INT(FAIL, validate_move(&move, SILENT));
+
+  move.promotion = P - 1;
+  TEST_ASSERT_EQUAL_INT(FAIL, validate_move(&move, SILENT));
 }
 
 void test_empty_move_is_invalid(void) {
@@ -38,6 +71,7 @@ void test_empty_move(void) {
   TEST_ASSERT_EQUAL_INT(false, move.quiet_move);
   TEST_ASSERT_EQUAL_INT(false, move.double_pawn);
   TEST_ASSERT_EQUAL_INT(false, move.capture);
+  TEST_ASSERT_EQUAL_INT(false, move.ep_capture);
   TEST_ASSERT_EQUAL_INT(false, move.kingside_castle);
   TEST_ASSERT_EQUAL_INT(false, move.queenside_castle);
 }
@@ -254,6 +288,7 @@ void test_encode_decode_moves(void) {
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_validate_move);
+  RUN_TEST(test_validate_move_promotion);
   RUN_TEST(test_empty_move_is_invalid);
   RUN_TEST(test_empty_move);
   RUN_TEST(test_encode_decode_squares);
