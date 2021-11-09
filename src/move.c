@@ -71,22 +71,21 @@ U16 encode_move(move_t * move) {
     aux_y_flag = 1;
   }
 
-  if(move->promotion == Q) {
-    aux_x_flag = 1;
-    aux_y_flag = 1;
-  }
-
-  if(move->promotion == R) {
-    aux_x_flag = 1;
-  }
-
-  if(move->promotion == N) {
-    aux_x_flag = 0;
-    aux_y_flag = 0;
-  }
-
-  if(move->promotion == B) {
-    aux_y_flag = 1;
+  if(promotion_flag) {
+    if(move->promotion == Q) {
+      aux_x_flag = 1;
+      aux_y_flag = 1;
+    }
+    else if(move->promotion == R) {
+      aux_x_flag = 1;
+    }
+    else if(move->promotion == N) {
+      aux_x_flag = 0;
+      aux_y_flag = 0;
+    }
+    else if(move->promotion == B) {
+      aux_y_flag = 1;
+    }
   }
 
   result |= promotion_flag << 3;
