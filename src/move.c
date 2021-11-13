@@ -3,6 +3,11 @@
 #include "board.h"
 #include "exits.h"
 
+//                    P  B  N  R  Q
+int x_from_prom[] = { 0, 0, 0, 1, 1 };
+int y_from_prom[] = { 0, 1, 0, 0, 1 };
+int prom_from_xy[] = { N, B, R, Q };
+
 exit_t validate_move(move_t * move, val_opt_t option) {
   if(move->origin < A1 || move->origin > H8) {
     if(option == VERBOSE) {
@@ -71,19 +76,8 @@ U16 encode_move(move_t * move) {
       aux_x_flag = 0;
       aux_y_flag = 1;
     } else if(promotion_flag) {
-      if(move->promotion == Q) {
-        aux_x_flag = 1;
-        aux_y_flag = 1;
-      } else if(move->promotion == R) {
-        aux_x_flag = 1;
-        aux_y_flag = 0;
-      } else if(move->promotion == N) {
-        aux_x_flag = 0;
-        aux_y_flag = 0;
-      } else if(move->promotion == B) {
-        aux_x_flag = 0;
-        aux_y_flag = 1;
-      }
+      aux_x_flag = x_from_prom[move->promotion];
+      aux_y_flag = y_from_prom[move->promotion];
     }
   }
 
@@ -123,16 +117,7 @@ exit_t decode_move(move_t * move, U16 encoded) {
     !(promotion_flag) && !(capture_flag) && aux_x_flag && aux_y_flag;
 
   if(promotion_flag) {
-    if(aux_x_flag && aux_y_flag) {
-      move->promotion = Q;
-    } else if(aux_x_flag && !aux_y_flag) {
-      move->promotion = R;
-    } else if(!aux_x_flag && aux_y_flag) {
-      move->promotion = B;
-    } else if(!aux_x_flag && !aux_y_flag) {
-      move->promotion = N;
-    }
-
+    move->promotion = prom_from_xy[encoded & 3];
   }
   // Decode squares
   encoded = encoded >> 4;
