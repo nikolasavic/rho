@@ -57,8 +57,7 @@ U16 encode_move(move_t * move) {
   int aux_x_flag = 0;
   int aux_y_flag = 0;
 
-  if(move->quiet_move) {
-  } else {
+  if(!move->quiet_move) {
     if(move->double_pawn) {
       aux_x_flag = 0;
       aux_y_flag = 1;
