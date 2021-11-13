@@ -109,18 +109,18 @@ exit_t decode_move(move_t * move, U16 encoded) {
     !(promotion_flag) && !(capture_flag) && !(aux_x_flag) && !(aux_y_flag);
 
   move->double_pawn =
-    !(promotion_flag) && !(capture_flag)  &&  !(aux_x_flag)  &&  aux_y_flag;
+    !(promotion_flag) && !(capture_flag) && !(aux_x_flag) && aux_y_flag;
 
   move->capture = capture_flag;
 
   move->ep_capture =
-    !(promotion_flag)  &&  capture_flag  &&  !(aux_x_flag)  &&  aux_y_flag;
+    !(promotion_flag) && capture_flag && !(aux_x_flag) && aux_y_flag;
 
   move->kingside_castle =
-    !(promotion_flag)  &&  !(capture_flag)  &&  aux_x_flag  &&  !(aux_y_flag);
+    !(promotion_flag) && !(capture_flag) && aux_x_flag && !(aux_y_flag);
 
   move->queenside_castle =
-    !(promotion_flag)  &&  !(capture_flag)  &&  aux_x_flag  &&  aux_y_flag;
+    !(promotion_flag) && !(capture_flag) && aux_x_flag && aux_y_flag;
 
   if(promotion_flag) {
     if(aux_x_flag && aux_y_flag) {
