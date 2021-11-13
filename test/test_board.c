@@ -112,7 +112,6 @@ void test_validate_board(void) {
   board.castle_rights = 2;
   board.side_to_move = 0;
 
-  print_board(&board);
   TEST_ASSERT_EQUAL_INT(SUCCESS, validate_board(&board, SILENT));
 }
 

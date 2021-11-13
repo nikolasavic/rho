@@ -9,6 +9,8 @@ side_t parse_side_to_move(const char string) {
     return WHITE;
   else if(string == 'b')
     return BLACK;
+  else
+    return NULL_SIDE;
 }
 
 castle_t parse_castling_rights(const char *string) {

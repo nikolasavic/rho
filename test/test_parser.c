@@ -15,6 +15,9 @@ void test_side_to_move(void) {
 
   const char white_side = 'w';
   TEST_ASSERT_EQUAL_INT(WHITE, parse_side_to_move(white_side));
+
+  const char error = 'x';
+  TEST_ASSERT_EQUAL_INT(NULL_SIDE, parse_side_to_move(error));
 }
 
 void test_castling_rights(void) {
