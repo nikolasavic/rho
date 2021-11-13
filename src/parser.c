@@ -115,6 +115,8 @@ exit_t parse_fen(board_t * board, const char *fen) {
   fen_ptr++;
 
   board->side_to_move = parse_side_to_move(*fen_ptr);
+  if(board->side_to_move == NULL_SIDE)
+    return FAIL;
   fen_ptr += 2;
 
   int len = 0;

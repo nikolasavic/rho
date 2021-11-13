@@ -256,6 +256,11 @@ void test_parse_fen(void) {
   TEST_ASSERT_EQUAL_INT(0, board.half_move_clock);
   TEST_ASSERT_EQUAL_INT(1, board.full_move_num);
 
+  TEST_ASSERT_EQUAL_INT(FAIL,
+                        parse_fen(&board,
+                                  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR x - - 0 1"));
+  TEST_ASSERT_EQUAL_INT(NULL_SIDE, board.side_to_move);
+
 }
 
 int main(void) {
