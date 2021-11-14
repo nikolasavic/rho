@@ -64,6 +64,12 @@ void test_pawn_attacks() {
   TEST_ASSERT_EQUAL_INT(2684354560ULL, pawn_attacks[BLACK][G5]);
 }
 
+void test_init_flag() {
+  TEST_ASSERT_EQUAL_INT(0, initialized);
+  init_all();
+  TEST_ASSERT_EQUAL_INT(1, initialized);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_init_rays);
@@ -71,5 +77,6 @@ int main(void) {
   RUN_TEST(test_knight_moves);
   RUN_TEST(test_pawn_moves);
   RUN_TEST(test_pawn_attacks);
+  RUN_TEST(test_init_flag);
   return UNITY_END();
 }

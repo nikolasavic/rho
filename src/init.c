@@ -1,6 +1,8 @@
 #include "init.h"
 #include "masks.h"
 
+int initialized = 0;
+
 void init_rays() {
   for(int i = 0; i < 64; i++) {
     rays[NORTH][i] = ray_north(i);
@@ -40,4 +42,13 @@ void init_pawn_attacks() {
       pawn_attacks[side][i] = pawn_attack_mask(i, side);
     }
   }
+}
+
+void init_all() {
+  init_rays();
+  init_king_moves();
+  init_knight_moves();
+  init_pawn_moves();
+  init_pawn_attacks();
+  initialized = 1;
 }
