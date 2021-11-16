@@ -9,6 +9,7 @@ U64 king_attack_mask(square_t);
 U64 knight_attack_mask(square_t);
 U64 rook_attack_mask(square_t, U64);
 U64 bishop_attack_mask(square_t, U64);
+U64 queen_attack_mask(square_t, U64);
 U64 ray_north(square_t);
 U64 ray_north_east(square_t);
 U64 ray_east(square_t);
