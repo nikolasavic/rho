@@ -124,6 +124,15 @@ U64 rook_attack_mask(square_t square, U64 occupancy) {
   return nor_atk | eas_atk | wes_atk | sou_atk;
 }
 
+U64 bishop_attack_mask(square_t square, U64 occupancy) {
+  U64 nor_eas_atk = get_positive_rays(square, NO_EAST, occupancy);
+  U64 nor_wes_atk = get_positive_rays(square, NO_WEST, occupancy);
+  U64 sou_wes_atk = get_negative_rays(square, SO_WEST, occupancy);
+  U64 sou_eas_atk = get_negative_rays(square, SO_EAST, occupancy);
+
+  return nor_eas_atk | nor_wes_atk | sou_wes_atk | sou_eas_atk;
+}
+
 U64 get_positive_rays(square_t square, dir_t dir, U64 occupancy) {
   U64 attack_ray = rays[dir][square];
   U64 blocker = attack_ray & occupancy;

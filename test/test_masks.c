@@ -370,6 +370,49 @@ void test_rook_attack_mask(void) {
   TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(A1, blockers));
 }
 
+void test_bishop_attack_mask(void) {
+  init_rays();
+  U64 expected, blockers;
+
+  blockers = 0ULL;
+  set_bit(A8, blockers);
+  set_bit(F3, blockers);
+  expected = 0ULL;
+  set_bit(A8, expected);
+  set_bit(A6, expected);
+  set_bit(C8, expected);
+  set_bit(C6, expected);
+  set_bit(D5, expected);
+  set_bit(E4, expected);
+  set_bit(F3, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(B7, blockers));
+
+
+  blockers = 0ULL;
+  set_bit(E4, blockers);
+  expected = 0ULL;
+  set_bit(B1, expected);
+  set_bit(B3, expected);
+  set_bit(A4, expected);
+  set_bit(D1, expected);
+  set_bit(D3, expected);
+  set_bit(E4, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(C2, blockers));
+
+  blockers = 0ULL;
+  expected = 0ULL;
+  set_bit(B8, expected);
+  set_bit(C7, expected);
+  set_bit(D6, expected);
+  set_bit(E5, expected);
+  set_bit(E1, expected);
+  set_bit(F2, expected);
+  set_bit(F4, expected);
+  set_bit(H4, expected);
+  set_bit(H2, expected);
+  TEST_ASSERT_EQUAL_INT(expected, bishop_attack_mask(G3, blockers));
+}
+
 void test_ray_north(void) {
   U64 expected = 0ULL;
 
@@ -544,6 +587,7 @@ int main(void) {
   RUN_TEST(test_king_attack_mask);
   RUN_TEST(test_knight_attack_mask);
   RUN_TEST(test_rook_attack_mask);
+  RUN_TEST(test_bishop_attack_mask);
   RUN_TEST(test_ray_north);
   RUN_TEST(test_ray_north_east);
   RUN_TEST(test_ray_east);
