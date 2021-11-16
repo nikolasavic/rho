@@ -1,4 +1,5 @@
 #include "../src/masks.h"
+#include "../src/init.h"
 #include "../src/bitboard.h"
 #include "../unity/unity.h"
 
@@ -312,6 +313,63 @@ void test_knight_attack_mask(void) {
   TEST_ASSERT_EQUAL_INT(expected, knight_attack_mask(G1));
 }
 
+void test_rook_attack_mask(void) {
+  init_rays();
+  U64 expected, blockers;
+
+  blockers = 0ULL;
+  set_bit(B3, blockers);
+  set_bit(C6, blockers);
+  set_bit(C2, blockers);
+  set_bit(G3, blockers);
+  expected = 0ULL;
+  set_bit(B3, expected);
+  set_bit(D3, expected);
+  set_bit(E3, expected);
+  set_bit(F3, expected);
+  set_bit(G3, expected);
+  set_bit(C2, expected);
+  set_bit(C4, expected);
+  set_bit(C5, expected);
+  set_bit(C6, expected);
+  TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(C3, blockers));
+
+  blockers = 0ULL;
+  set_bit(F8, blockers);
+  set_bit(G7, blockers);
+  set_bit(F2, blockers);
+  set_bit(D7, blockers);
+  expected = 0ULL;
+  set_bit(F8, expected);
+  set_bit(F6, expected);
+  set_bit(F5, expected);
+  set_bit(F4, expected);
+  set_bit(F3, expected);
+  set_bit(F2, expected);
+  set_bit(G7, expected);
+  set_bit(E7, expected);
+  set_bit(D7, expected);
+  TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(F7, blockers));
+
+  blockers = 0ULL;
+  expected = 0ULL;
+  set_bit(A8, expected);
+  set_bit(A7, expected);
+  set_bit(A6, expected);
+  set_bit(A5, expected);
+  set_bit(A4, expected);
+  set_bit(A3, expected);
+  set_bit(A2, expected);
+  set_bit(B1, expected);
+  set_bit(C1, expected);
+  set_bit(D1, expected);
+  set_bit(E1, expected);
+  set_bit(F1, expected);
+  set_bit(G1, expected);
+  set_bit(H1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, rook_attack_mask(A1, blockers));
+}
+
 void test_ray_north(void) {
   U64 expected = 0ULL;
 
@@ -485,6 +543,7 @@ int main(void) {
   RUN_TEST(test_pawn_motion_mask);
   RUN_TEST(test_king_attack_mask);
   RUN_TEST(test_knight_attack_mask);
+  RUN_TEST(test_rook_attack_mask);
   RUN_TEST(test_ray_north);
   RUN_TEST(test_ray_north_east);
   RUN_TEST(test_ray_east);

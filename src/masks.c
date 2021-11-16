@@ -12,6 +12,11 @@ const U64 RANK_7 = 71776119061217280ULL;
 const U64 RANK_8 = 18374686479671623680ULL;;
 const U64 RANK_18 = 18374686479671623935ULL;
 const U64 RANK_78 = 18446462598732840960ULL;
+const U64 SQ_H8 = 9223372036854775808ULL;
+const U64 SQ_A1 = 1ULL;
+
+U64 get_positive_rays(square_t square, dir_t dir, U64 occupancy);
+U64 get_negative_rays(square_t square, dir_t dir, U64 occupancy);
 
 U64 pawn_attack_mask(square_t square, side_t side) {
   U64 bb = 0ULL;
@@ -108,6 +113,31 @@ U64 knight_attack_mask(square_t square) {
     set_bit((square - 15), bb);
 
   return bb;
+}
+
+U64 rook_attack_mask(square_t square, U64 occupancy) {
+  U64 nor_atk = get_positive_rays(square, NORTH, occupancy);
+  U64 eas_atk = get_positive_rays(square, EAST, occupancy);
+  U64 wes_atk = get_negative_rays(square, WEST, occupancy);
+  U64 sou_atk = get_negative_rays(square, SOUTH, occupancy);
+
+  return nor_atk | eas_atk | wes_atk | sou_atk;
+}
+
+U64 get_positive_rays(square_t square, dir_t dir, U64 occupancy) {
+  U64 attack_ray = rays[dir][square];
+  U64 blocker = attack_ray & occupancy;
+  square_t scan_sqr = bitscan_fwd(blocker | SQ_H8);
+  U64 result = attack_ray ^ rays[dir][scan_sqr];
+  return result;
+}
+
+U64 get_negative_rays(square_t square, dir_t dir, U64 occupancy) {
+  U64 attack_ray = rays[dir][square];
+  U64 blocker = attack_ray & occupancy;
+  square_t scan_sqr = bitscan_rev(blocker | SQ_A1);
+  U64 result = attack_ray ^ rays[dir][scan_sqr];
+  return result;
 }
 
 U64 ray_north(square_t square) {

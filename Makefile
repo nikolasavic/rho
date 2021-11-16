@@ -8,7 +8,7 @@ test_bitboard:
 
 test_masks:
 	mkdir -p build/test
-	gcc test/test_masks.c src/bitboard.c src/board.c src/masks.c unity/unity.c -o build/test/test_masks
+	gcc test/test_masks.c src/init.c src/bitboard.c src/board.c src/masks.c unity/unity.c -o build/test/test_masks
 	./build/test/test_masks
 
 test_board:
@@ -30,6 +30,11 @@ test_init:
 	mkdir -p build/test
 	gcc test/test_init.c src/init.c src/bitboard.c src/masks.c unity/unity.c -o build/test/test_move
 	./build/test/test_move
+
+test_move_gen:
+	mkdir -p build/test
+	gcc test/test_move_gen.c src/init.c src/move_gen.c src/bitboard.c src/masks.c src/board.c src/move.c src/parser.c unity/unity.c -o build/test/test_move_gen
+	./build/test/test_move_gen
 
 clean:
 	rm -rf build/*
