@@ -31,10 +31,10 @@ test_init:
 	gcc test/test_init.c src/init.c src/bitboard.c src/masks.c unity/unity.c -o build/test/test_move
 	./build/test/test_move
 
-test_move_gen:
+test_move_list:
 	mkdir -p build/test
-	gcc test/test_move_gen.c src/init.c src/move_gen.c src/bitboard.c src/masks.c src/board.c src/move.c src/parser.c unity/unity.c -o build/test/test_move_gen
-	./build/test/test_move_gen
+	gcc test/test_move_list.c src/init.c src/move_list.c src/bitboard.c src/masks.c src/board.c src/move.c src/parser.c unity/unity.c -o build/test/test_move_list
+	./build/test/test_move_list
 
 clean:
 	rm -rf build/*
