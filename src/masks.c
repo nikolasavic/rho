@@ -152,6 +152,7 @@ U64 get_positive_rays(square_t square, dir_t dir, U64 occupancy) {
   U64 blocker = attack_ray & occupancy;
   square_t scan_sqr = bitscan_fwd(blocker | SQ_H8);
   U64 result = attack_ray ^ rays[dir][scan_sqr];
+
   return result;
 }
 
@@ -160,6 +161,7 @@ U64 get_negative_rays(square_t square, dir_t dir, U64 occupancy) {
   U64 blocker = attack_ray & occupancy;
   square_t scan_sqr = bitscan_rev(blocker | SQ_A1);
   U64 result = attack_ray ^ rays[dir][scan_sqr];
+
   return result;
 }
 
