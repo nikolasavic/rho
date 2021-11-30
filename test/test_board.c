@@ -1,7 +1,10 @@
 #include "../src/board.h"
 #include "../unity/unity.h"
 
+board_t b;
+
 void setUp(void) {
+  empty_board(&b);
 }
 
 void tearDown(void) {
@@ -75,9 +78,6 @@ void test_square_names(void) {
 }
 
 void test_empty_board(void) {
-  board_t b;
-  empty_board(&b);
-
   TEST_ASSERT_EQUAL_INT(NULL_SIDE, b.side_to_move);
   TEST_ASSERT_EQUAL_INT(NULL_SQ, b.ep_square);
   TEST_ASSERT_EQUAL_INT(0, b.half_move_clock);
@@ -93,32 +93,29 @@ void test_empty_board(void) {
 }
 
 void test_validate_board(void) {
-  board_t board = { 0 };
-  board.pieces[BLACK][P] = 268959744ULL;
-  board.pieces[BLACK][N] = 137438953472ULL;
-  board.pieces[BLACK][B] = 512ULL;
-  board.pieces[BLACK][R] = 129ULL;
-  board.pieces[BLACK][Q] = 2048ULL;
-  board.pieces[BLACK][K] = 64ULL;
-  board.pieces[WHITE][P] = 4501125726208ULL;
-  board.pieces[WHITE][N] = 35184372088832ULL;
-  board.pieces[WHITE][B] = 70385924046848ULL;
-  board.pieces[WHITE][R] = 9295429630892703744ULL;
-  board.pieces[WHITE][Q] = 576460752303423488ULL;
-  board.pieces[WHITE][K] = 18014398509481984ULL;
-  board.ep_square = 23;
-  board.half_move_clock = 7;
-  board.full_move_num = 15;
-  board.castle_rights = 2;
-  board.side_to_move = 0;
+  b.pieces[BLACK][P] = 268959744ULL;
+  b.pieces[BLACK][N] = 137438953472ULL;
+  b.pieces[BLACK][B] = 512ULL;
+  b.pieces[BLACK][R] = 129ULL;
+  b.pieces[BLACK][Q] = 2048ULL;
+  b.pieces[BLACK][K] = 64ULL;
+  b.pieces[WHITE][P] = 4501125726208ULL;
+  b.pieces[WHITE][N] = 35184372088832ULL;
+  b.pieces[WHITE][B] = 70385924046848ULL;
+  b.pieces[WHITE][R] = 9295429630892703744ULL;
+  b.pieces[WHITE][Q] = 576460752303423488ULL;
+  b.pieces[WHITE][K] = 18014398509481984ULL;
+  b.ep_square = 23;
+  b.half_move_clock = 7;
+  b.full_move_num = 15;
+  b.castle_rights = 2;
+  b.side_to_move = 0;
 
-  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_board(&board, SILENT));
+  TEST_ASSERT_EQUAL_INT(SUCCESS, validate_board(&b, SILENT));
 }
 
 void test_empty_board_is_invalid(void) {
-  board_t board = { 0 };
-  empty_board(&board);
-  TEST_ASSERT_EQUAL_INT(FAIL, validate_board(&board, SILENT));
+  TEST_ASSERT_EQUAL_INT(FAIL, validate_board(&b, SILENT));
 }
 
 void test_square_to_rank(void) {
