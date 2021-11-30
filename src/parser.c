@@ -91,26 +91,40 @@ square_t parse_square(const char *string) {
   return rank * 8 + file;
 }
 
+int square_order[] = {
+  56, 57, 58, 59, 60, 61, 62, 63,
+  48, 49, 50, 51, 52, 53, 54, 55,
+  40, 41, 42, 43, 44, 45, 46, 47,
+  32, 33, 34, 35, 36, 37, 38, 39,
+  24, 25, 26, 27, 28, 29, 30, 31,
+  16, 17, 18, 19, 20, 21, 22, 23,
+  8, 9, 10, 11, 12, 13, 14, 15,
+  0, 1, 2, 3, 4, 5, 6, 7,
+};
+
 exit_t parse_fen(board_t * board, const char *fen) {
   empty_board(board);
   const char *fen_ptr = fen;
+  int square_ptr = 0;
   square_t square = 0;
 
-  while(square < 64) {
+  while(square_ptr < 64) {
+    square = square_order[square_ptr];
     if(*fen_ptr == '/') {
       fen_ptr++;
       continue;
     }
 
     if(*fen_ptr > '0' && *fen_ptr < '9') {
-      square += *fen_ptr - 48;
+      square_ptr += *fen_ptr - 48;
+      square = square_order[square_ptr];
       fen_ptr++;
       continue;
     }
 
     parse_piece_char(board->pieces, *fen_ptr, square);
     fen_ptr++;
-    square++;
+    square_ptr++;
   }
   fen_ptr++;
 

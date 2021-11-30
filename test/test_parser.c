@@ -223,7 +223,7 @@ void test_parse_square(void) {
   TEST_ASSERT_EQUAL_INT(H1, parse_square(square));
 }
 
-void test_parse_fen(void) {
+void test_parse_game_state(void) {
   board_t board;
 
   TEST_ASSERT_EQUAL_INT(SUCCESS,
@@ -263,6 +263,82 @@ void test_parse_fen(void) {
 
 }
 
+void test_parse_position(void) {
+  board_t board;
+  U64 expected = 0ULL;
+
+  TEST_ASSERT_EQUAL_INT(SUCCESS,
+                        parse_fen(&board,
+                                  "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"));
+
+  set_bit(A2, expected);
+  set_bit(B2, expected);
+  set_bit(C2, expected);
+  set_bit(D2, expected);
+  set_bit(E2, expected);
+  set_bit(F2, expected);
+  set_bit(G2, expected);
+  set_bit(H2, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[WHITE][P]);
+
+  expected = 0ULL;
+  set_bit(A7, expected);
+  set_bit(B7, expected);
+  set_bit(C7, expected);
+  set_bit(D7, expected);
+  set_bit(E7, expected);
+  set_bit(F7, expected);
+  set_bit(G7, expected);
+  set_bit(H7, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[BLACK][P]);
+
+  expected = 0ULL;
+  set_bit(A1, expected);
+  set_bit(H1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[WHITE][R]);
+
+  expected = 0ULL;
+  set_bit(A8, expected);
+  set_bit(H8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[BLACK][R]);
+
+  expected = 0ULL;
+  set_bit(B1, expected);
+  set_bit(G1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[WHITE][N]);
+
+  expected = 0ULL;
+  set_bit(B8, expected);
+  set_bit(G8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[BLACK][N]);
+
+  expected = 0ULL;
+  set_bit(C1, expected);
+  set_bit(F1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[WHITE][B]);
+
+  expected = 0ULL;
+  set_bit(C8, expected);
+  set_bit(F8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[BLACK][B]);
+
+  expected = 0ULL;
+  set_bit(D1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[WHITE][Q]);
+
+  expected = 0ULL;
+  set_bit(D8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[BLACK][Q]);
+
+  expected = 0ULL;
+  set_bit(E1, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[WHITE][K]);
+
+  expected = 0ULL;
+  set_bit(E8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, board.pieces[BLACK][K]);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_side_to_move);
@@ -270,6 +346,7 @@ int main(void) {
   RUN_TEST(test_parse_piece_char);
   RUN_TEST(test_parse_string_int);
   RUN_TEST(test_parse_square);
-  RUN_TEST(test_parse_fen);
+  RUN_TEST(test_parse_game_state);
+  RUN_TEST(test_parse_position);
   return UNITY_END();
 }
