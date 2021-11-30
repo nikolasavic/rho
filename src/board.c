@@ -47,6 +47,14 @@ char *piece_ascii[] = {
   "P", "B", "N", "R", "Q", "K", "p", "b", "n", "r", "q", "k"
 };
 
+void set_occupancy(board_t * b) {
+  for(int i = 0; i < 6; i++) {
+    b->occupancy[WHITE] |= b->pieces[WHITE][i];
+    b->occupancy[BLACK] |= b->pieces[BLACK][i];
+  }
+  b->occupancy[BOTH] = b->occupancy[WHITE] | b->occupancy[BLACK];
+}
+
 exit_t validate_board(board_t * board, val_opt_t option) {
   if(board->half_move_clock < 0) {
     if(option == VERBOSE) {

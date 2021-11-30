@@ -43,6 +43,7 @@ extern char *piece_unicode[];
 extern char *piece_ascii[];
 
 void empty_board(board_t *);
+void set_occupancy(board_t *);
 exit_t validate_board(board_t *, val_opt_t);
 char *decode_castling_rights(int);
 

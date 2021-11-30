@@ -1,4 +1,5 @@
 #include "../src/board.h"
+#include "../src/parser.h"
 #include "../unity/unity.h"
 
 board_t b;
@@ -144,6 +145,72 @@ void test_square_to_file(void) {
   TEST_ASSERT_EQUAL_INT(7, square_to_file[H8]);
 }
 
+void test_set_occupancy(void) {
+  U64 expected = 0ULL;
+  parse_fen(&b, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+
+  TEST_ASSERT_EQUAL_INT(0, b.occupancy[WHITE]);
+  TEST_ASSERT_EQUAL_INT(0, b.occupancy[BLACK]);
+  TEST_ASSERT_EQUAL_INT(0, b.occupancy[BOTH]);
+
+  set_occupancy(&b);
+
+  set_bit(A1, expected);
+  set_bit(B1, expected);
+  set_bit(C1, expected);
+  set_bit(D1, expected);
+  set_bit(E1, expected);
+  set_bit(F1, expected);
+  set_bit(G1, expected);
+  set_bit(H1, expected);
+  set_bit(A2, expected);
+  set_bit(B2, expected);
+  set_bit(C2, expected);
+  set_bit(D2, expected);
+  set_bit(E2, expected);
+  set_bit(F2, expected);
+  set_bit(G2, expected);
+  set_bit(H2, expected);
+  TEST_ASSERT_EQUAL_INT(expected, b.occupancy[WHITE]);
+
+  set_bit(A7, expected);
+  set_bit(B7, expected);
+  set_bit(C7, expected);
+  set_bit(D7, expected);
+  set_bit(E7, expected);
+  set_bit(F7, expected);
+  set_bit(G7, expected);
+  set_bit(H7, expected);
+  set_bit(A8, expected);
+  set_bit(B8, expected);
+  set_bit(C8, expected);
+  set_bit(D8, expected);
+  set_bit(E8, expected);
+  set_bit(F8, expected);
+  set_bit(G8, expected);
+  set_bit(H8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, b.occupancy[BOTH]);
+
+  expected = 0ULL;
+  set_bit(A7, expected);
+  set_bit(B7, expected);
+  set_bit(C7, expected);
+  set_bit(D7, expected);
+  set_bit(E7, expected);
+  set_bit(F7, expected);
+  set_bit(G7, expected);
+  set_bit(H7, expected);
+  set_bit(A8, expected);
+  set_bit(B8, expected);
+  set_bit(C8, expected);
+  set_bit(D8, expected);
+  set_bit(E8, expected);
+  set_bit(F8, expected);
+  set_bit(G8, expected);
+  set_bit(H8, expected);
+  TEST_ASSERT_EQUAL_INT(expected, b.occupancy[BLACK]);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_square_names);
@@ -152,5 +219,6 @@ int main(void) {
   RUN_TEST(test_empty_board_is_invalid);
   RUN_TEST(test_square_to_rank);
   RUN_TEST(test_square_to_file);
+  RUN_TEST(test_set_occupancy);
   return UNITY_END();
 }
