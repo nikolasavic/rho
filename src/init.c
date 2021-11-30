@@ -3,7 +3,7 @@
 
 int initialized = 0;
 
-void init_rays() {
+void init_rays(void) {
   for(int i = 0; i < 64; i++) {
     rays[NORTH][i] = ray_north(i);
     rays[NO_EAST][i] = ray_north_east(i);
@@ -16,19 +16,19 @@ void init_rays() {
   }
 }
 
-void init_king_moves() {
+void init_king_moves(void) {
   for(int i = 0; i < 64; i++) {
     king_moves[i] = king_attack_mask(i);
   }
 }
 
-void init_knight_moves() {
+void init_knight_moves(void) {
   for(int i = 0; i < 64; i++) {
     knight_moves[i] = knight_attack_mask(i);
   }
 }
 
-void init_pawn_moves() {
+void init_pawn_moves(void) {
   for(int side = 0; side < 2; side++) {
     for(int i = 0; i < 64; i++) {
       pawn_moves[side][i] = pawn_motion_mask(i, side);
@@ -36,7 +36,7 @@ void init_pawn_moves() {
   }
 }
 
-void init_pawn_attacks() {
+void init_pawn_attacks(void) {
   for(int side = 0; side < 2; side++) {
     for(int i = 0; i < 64; i++) {
       pawn_attacks[side][i] = pawn_attack_mask(i, side);
@@ -44,7 +44,7 @@ void init_pawn_attacks() {
   }
 }
 
-void init_all() {
+void init_all(void) {
   init_rays();
   init_king_moves();
   init_knight_moves();
