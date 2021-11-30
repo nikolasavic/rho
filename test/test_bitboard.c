@@ -2,21 +2,20 @@
 #include "../src/board.h"
 #include "../unity/unity.h"
 
+U64 bb;
+
 void setUp(void) {
+  bb = 0ULL;
 }
 
 void tearDown(void) {
 }
 
 void test_pop_count_empty_bitboard(void) {
-  U64 bb = 0ULL;
-
   TEST_ASSERT_EQUAL_INT(0, pop_count(bb));
 }
 
 void test_pop_count_non_empty_bitboard(void) {
-  U64 bb = 0ULL;
-
   set_bit(E4, bb);
   set_bit(C2, bb);
   set_bit(F6, bb);
@@ -25,14 +24,13 @@ void test_pop_count_non_empty_bitboard(void) {
 }
 
 void test_pop_count_full_bitboard(void) {
-  U64 bb = ~0ULL;
+  bb = ~0ULL;
 
   TEST_ASSERT_EQUAL_INT(64, pop_count(bb));
 }
 
-void test_pop_bit() {
-  U64 bb = ~0ULL;
-
+void test_pop_bit(void) {
+  bb = ~0ULL;
 
   TEST_ASSERT_EQUAL_INT(1, get_bit(E4, bb));
   pop_bit(E4, bb);
@@ -46,9 +44,7 @@ void test_pop_bit() {
   TEST_ASSERT_EQUAL_INT(0, get_bit(F3, bb));
 }
 
-void test_bitscan_fwd() {
-  U64 bb = 0ULL;
-
+void test_bitscan_fwd(void) {
   set_bit(H8, bb);
   TEST_ASSERT_EQUAL_INT(H8, bitscan_fwd(bb));
 
@@ -242,9 +238,7 @@ void test_bitscan_fwd() {
   TEST_ASSERT_EQUAL_INT(A1, bitscan_fwd(bb));
 }
 
-void test_bitscan_rev() {
-  U64 bb = 0ULL;
-
+void test_bitscan_rev(void) {
   set_bit(A1, bb);
   TEST_ASSERT_EQUAL_INT(A1, bitscan_rev(bb));
 
