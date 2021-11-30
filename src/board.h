@@ -19,7 +19,7 @@ typedef enum {
 typedef unsigned char castle_t;
 
 typedef enum {
-  WHITE, BLACK, NULL_SIDE
+  WHITE, BLACK, BOTH, NULL_SIDE
 } side_t;
 
 typedef enum {
@@ -30,6 +30,7 @@ typedef struct board_s {
   side_t side_to_move;
   castle_t castle_rights;
   U64 pieces[2][6];
+  U64 occupancy[3];
   square_t ep_square;
   int half_move_clock;
   int full_move_num;

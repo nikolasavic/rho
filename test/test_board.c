@@ -90,6 +90,10 @@ void test_empty_board(void) {
       TEST_ASSERT_EQUAL_INT(0, b.pieces[side][piece]);
     }
   }
+
+  TEST_ASSERT_EQUAL_INT(0, b.occupancy[WHITE]);
+  TEST_ASSERT_EQUAL_INT(0, b.occupancy[BLACK]);
+  TEST_ASSERT_EQUAL_INT(0, b.occupancy[BOTH]);
 }
 
 void test_validate_board(void) {
