@@ -36,5 +36,10 @@ test_move_list:
 	gcc test/test_move_list.c src/init.c src/move_list.c src/bitboard.c src/masks.c src/board.c src/move.c src/parser.c unity/unity.c -o build/test/test_move_list
 	./build/test/test_move_list
 
+test_move_gen:
+	mkdir -p build/test
+	gcc test/helpers.c test/test_move_gen.c src/init.c src/move_gen.c src/move_list.c src/bitboard.c src/masks.c src/board.c src/move.c src/parser.c unity/unity.c -o build/test/test_move_gen
+	./build/test/test_move_gen
+
 clean:
 	rm -rf build/*

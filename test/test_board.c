@@ -145,6 +145,267 @@ void test_square_to_file(void) {
   TEST_ASSERT_EQUAL_INT(7, square_to_file[H8]);
 }
 
+void test_square_to_bitboard(void) {
+  U64 bb;
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A8], bb);
+
+  bb = 0ULL;
+  set_bit(B8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B8], bb);
+
+  bb = 0ULL;
+  set_bit(C8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C8], bb);
+
+  bb = 0ULL;
+  set_bit(D8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D8], bb);
+
+  bb = 0ULL;
+  set_bit(E8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E8], bb);
+
+  bb = 0ULL;
+  set_bit(F8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F8], bb);
+
+  bb = 0ULL;
+  set_bit(G8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G8], bb);
+
+  bb = 0ULL;
+  set_bit(H8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H8], bb);
+
+  bb = 0ULL;
+  set_bit(A7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A7], bb);
+
+  bb = 0ULL;
+  set_bit(B7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B7], bb);
+
+  bb = 0ULL;
+  set_bit(C7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C7], bb);
+
+  bb = 0ULL;
+  set_bit(D7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D7], bb);
+
+  bb = 0ULL;
+  set_bit(E7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E7], bb);
+
+  bb = 0ULL;
+  set_bit(F7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F7], bb);
+
+  bb = 0ULL;
+  set_bit(G7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G7], bb);
+
+  bb = 0ULL;
+  set_bit(H7, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H7], bb);
+
+  bb = 0ULL;
+  set_bit(A6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A6], bb);
+
+  bb = 0ULL;
+  set_bit(B6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B6], bb);
+
+  bb = 0ULL;
+  set_bit(C6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C6], bb);
+
+  bb = 0ULL;
+  set_bit(D6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D6], bb);
+
+  bb = 0ULL;
+  set_bit(E6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E6], bb);
+
+  bb = 0ULL;
+  set_bit(F6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F6], bb);
+
+  bb = 0ULL;
+  set_bit(G6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G6], bb);
+
+  bb = 0ULL;
+  set_bit(H6, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H6], bb);
+
+  bb = 0ULL;
+  set_bit(A5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A5], bb);
+
+  bb = 0ULL;
+  set_bit(B5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B5], bb);
+
+  bb = 0ULL;
+  set_bit(C5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C5], bb);
+
+  bb = 0ULL;
+  set_bit(D5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D5], bb);
+
+  bb = 0ULL;
+  set_bit(E5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E5], bb);
+
+  bb = 0ULL;
+  set_bit(F5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F5], bb);
+
+  bb = 0ULL;
+  set_bit(G5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G5], bb);
+
+  bb = 0ULL;
+  set_bit(H5, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H5], bb);
+
+  bb = 0ULL;
+  set_bit(A4, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A4], bb);
+
+  bb = 0ULL;
+  set_bit(B4, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B4], bb);
+
+  bb = 0ULL;
+  set_bit(C4, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C4], bb);
+
+  bb = 0ULL;
+  set_bit(D4, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D4], bb);
+
+  // FIXME start here
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E4], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F4], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G4], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H4], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H3], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H2], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[A1], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[B1], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[C1], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[D1], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[E1], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[F1], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[G1], bb);
+
+  bb = 0ULL;
+  set_bit(A8, bb);
+  TEST_ASSERT_EQUAL_INT(square_to_bitboard[H1], bb);
+}
+
 void test_set_occupancy(void) {
   U64 expected = 0ULL;
   parse_fen(&b, "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");

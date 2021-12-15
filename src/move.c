@@ -131,6 +131,16 @@ exit_t decode_move(move_t * move, U16 encoded) {
   return SUCCESS;
 }
 
+void print_encoded_move(U16 encoded_move) {
+  move_t move = {0};
+  decode_move(&move, encoded_move);
+  printf("%s->%s prom:%d, capt:%d, quiet:%d double:%d, king:%d, queen:%d\n",
+         square_name[move.origin], square_name[move.target],
+         move.promotion, move.capture, move.quiet_move,
+         move.double_pawn, move.kingside_castle, move.queenside_castle);
+
+}
+
 void print_move(move_t * move) {
   printf("%s->%s prom:%d, capt:%d, quiet:%d double:%d, king:%d, queen:%d\n",
          square_name[move->origin], square_name[move->target],
