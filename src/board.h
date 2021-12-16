@@ -39,6 +39,7 @@ typedef struct board_s {
 extern char *square_name[];
 extern int square_to_rank[];
 extern int square_to_file[];
+extern U64 square_to_bitboard[];
 extern char *piece_unicode[];
 extern char *piece_ascii[];
 

@@ -13,7 +13,7 @@ test_masks:
 
 test_board:
 	mkdir -p build/test
-	gcc test/test_board.c  src/board.c src/parser.c unity/unity.c -o build/test/test_board
+	gcc test/test_board.c src/board.c src/parser.c unity/unity.c -o build/test/test_board
 	./build/test/test_board
 
 test_parser:
