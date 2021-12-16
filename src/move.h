@@ -24,5 +24,6 @@ exit_t validate_move(move_t *, val_opt_t);
 U16 encode_move(move_t *);
 exit_t decode_move(move_t *, U16);
 void print_move(move_t *);
+void print_encoded_move(U16);
 
 #endif
