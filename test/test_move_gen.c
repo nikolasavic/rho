@@ -68,6 +68,21 @@ void test_get_knight_psuedo_moves_black(void) {
   }
 }
 
+void test_get_knight_psuedo_moves_no_moves(void) {
+  parse_fen(&board, "4r3/6n1/4k1p1/5p1p/2nP1K1P/2P3P1/1P2N3/2B3N1 w - - 0 1");
+  set_occupancy(&board);
+
+  int expected_move_len = 0;
+
+  square_t square = E2;
+  get_knight_psuedo_moves(&ml, &board, square, WHITE);
+  TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
+
+  square = G7;
+  get_knight_psuedo_moves(&ml, &board, square, BLACK);
+  TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
+}
+
 void test_get_king_psuedo_moves_white(void) {
   parse_fen(&board, "8/1k6/8/1Pp5/2K5/8/8/8 w - - 0 1");
   set_occupancy(&board);
@@ -119,11 +134,29 @@ void test_get_king_psuedo_moves_black(void) {
   }
 }
 
+void test_get_king_psuedo_moves_no_moves(void) {
+  parse_fen(&board,
+            "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  set_occupancy(&board);
+
+  int expected_move_len = 0;
+
+  square_t square = E1;
+  get_king_psuedo_moves(&ml, &board, square, WHITE);
+  TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
+
+  square = E8;
+  get_king_psuedo_moves(&ml, &board, square, BLACK);
+  TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_get_knight_psuedo_moves_white);
   RUN_TEST(test_get_knight_psuedo_moves_black);
+  RUN_TEST(test_get_knight_psuedo_moves_no_moves);
   RUN_TEST(test_get_king_psuedo_moves_white);
   RUN_TEST(test_get_king_psuedo_moves_black);
+  RUN_TEST(test_get_king_psuedo_moves_no_moves);
   return UNITY_END();
 }
