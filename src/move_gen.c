@@ -4,7 +4,7 @@
 #include "board.h"
 #include "bitboard.h"
 
-void get_knight_moves(move_list_t * ml, board_t * board, square_t origin,
+void get_knight_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
                       side_t side) {
   U64 target_bb;
   move_t move = { 0 };

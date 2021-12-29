@@ -5,6 +5,6 @@
 #include "move_list.h"
 #include "board.h"
 
-void get_knight_moves(move_list_t *, board_t *, square_t, side_t);
+void get_knight_psuedo_moves(move_list_t *, board_t *, square_t, side_t);
 
 #endif

@@ -20,7 +20,7 @@ void setUp(void) {
 void tearDown(void) {
 }
 
-void test_get_knight_moves_white(void) {
+void test_get_knight_psuedo_moves_white(void) {
   parse_fen(&board,
             "r1bqkbnr/ppp2ppp/2n5/3pp3/4P3/2N2N2/PPPP1PPP/R1BQKB1R w KQkq - 2 3");
   set_occupancy(&board);
@@ -36,7 +36,7 @@ void test_get_knight_moves_white(void) {
     {C3, D5, 0, 0, 0, 1, 0, 0, 0},
   };
 
-  get_knight_moves(&ml, &board, square, WHITE);
+  get_knight_psuedo_moves(&ml, &board, square, WHITE);
 
   TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
   for(int i = 0; i < expected_move_len; i++) {
@@ -44,7 +44,7 @@ void test_get_knight_moves_white(void) {
   }
 }
 
-void test_get_knight_moves_black(void) {
+void test_get_knight_psuedo_moves_black(void) {
   parse_fen(&board, "5k2/8/4np2/4p1n1/5P2/6P1/6K1/4R3 b - - 0 1");
   set_occupancy(&board);
   square_t square = E6;
@@ -60,7 +60,13 @@ void test_get_knight_moves_black(void) {
     {E6, G7, 0, 1, 0, 0, 0, 0, 0},
   };
 
-  get_knight_moves(&ml, &board, square, BLACK);
+  get_knight_psuedo_moves(&ml, &board, square, BLACK);
+
+  TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
+  for(int i = 0; i < expected_move_len; i++) {
+    TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_moves[i]));
+  }
+}
 
   TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
   for(int i = 0; i < expected_move_len; i++) {
@@ -70,7 +76,7 @@ void test_get_knight_moves_black(void) {
 
 int main(void) {
   UNITY_BEGIN();
-  RUN_TEST(test_get_knight_moves_white);
-  RUN_TEST(test_get_knight_moves_black);
+  RUN_TEST(test_get_knight_psuedo_moves_white);
+  RUN_TEST(test_get_knight_psuedo_moves_black);
   return UNITY_END();
 }
