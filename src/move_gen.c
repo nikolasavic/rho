@@ -50,3 +50,10 @@ void get_rook_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
   moves &= ~(board->occupancy[side]);
   add_simple_psuedo_moves(ml, board, origin, side, moves);
 }
+
+void get_bishop_psuedo_moves(move_list_t * ml, board_t * board,
+                             square_t origin, side_t side) {
+  U64 moves = bishop_attack_mask(origin, board->occupancy[BOTH]);
+  moves &= ~(board->occupancy[side]);
+  add_simple_psuedo_moves(ml, board, origin, side, moves);
+}
