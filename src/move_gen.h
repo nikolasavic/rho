@@ -10,5 +10,6 @@ void get_king_psuedo_moves(move_list_t *, board_t *, square_t, side_t);
 void get_rook_psuedo_moves(move_list_t *, board_t *, square_t, side_t);
 void get_bishop_psuedo_moves(move_list_t *, board_t *, square_t, side_t);
 void get_queen_psuedo_moves(move_list_t *, board_t *, square_t, side_t);
+void get_pawn_psuedo_moves(move_list_t *, board_t *, square_t, side_t);
 
 #endif

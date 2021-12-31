@@ -64,3 +64,28 @@ void get_queen_psuedo_moves(move_list_t * ml, board_t * board,
   moves &= ~(board->occupancy[side]);
   add_simple_psuedo_moves(ml, board, origin, side, moves);
 }
+
+void get_pawn_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
+                           side_t side) {
+  U64 target_bb;
+  move_t move = { 0 };
+  square_t target;
+  bool capture;
+  bool quiet;
+
+  U64 moves = pawn_moves[side][origin];
+  move.origin = origin;
+
+  print_bitboard(moves);
+  while(moves) {
+    target = bitscan_fwd(moves);
+    target_bb = square_to_bitboard[target];
+    quiet = 1;
+    move.target = target;
+    move.quiet_move = quiet;
+
+    add_to_move_list(ml, encode_move(&move));
+
+    pop_bit(target, moves);
+  }
+}

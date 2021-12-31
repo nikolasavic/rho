@@ -377,6 +377,44 @@ void test_get_queen_psuedo_moves_no_moves(void) {
   TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
 }
 
+void test_get_pawn_psuedo_moves_single(void) {
+  parse_fen(&board,
+            "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  set_occupancy(&board);
+
+  square_t square = E2;
+  //                          s,  t, p, q, d, c, e, k, q
+  move_t expected_move_w = { E2, E3, 0, 1, 0, 0, 0, 0, 0 };
+  get_pawn_psuedo_moves(&ml, &board, square, WHITE);
+
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move_w));
+
+  square = E7;
+  //                          s,  t, p, q, d, c, e, k, q
+  move_t expected_move_b = { E7, E6, 0, 1, 0, 0, 0, 0, 0 };
+  get_pawn_psuedo_moves(&ml, &board, square, BLACK);
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move_b));
+}
+
+void test_get_pawn_psuedo_moves_double(void) {
+  parse_fen(&board,
+            "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  set_occupancy(&board);
+
+  square_t square = E2;
+  //                          s,  t, p, q, d, c, e, k, q
+  move_t expected_move_w = { E2, E4, 0, 1, 0, 0, 0, 0, 0 };
+  get_pawn_psuedo_moves(&ml, &board, square, WHITE);
+
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move_w));
+
+  square = E7;
+  //                          s,  t, p, q, d, c, e, k, q
+  move_t expected_move_b = { E7, E5, 0, 1, 0, 0, 0, 0, 0 };
+  get_pawn_psuedo_moves(&ml, &board, square, BLACK);
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move_b));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_get_knight_psuedo_moves_white);
@@ -394,5 +432,7 @@ int main(void) {
   RUN_TEST(test_get_queen_psuedo_moves_white);
   RUN_TEST(test_get_queen_psuedo_moves_black);
   RUN_TEST(test_get_queen_psuedo_moves_no_moves);
+  RUN_TEST(test_get_pawn_psuedo_moves_single);
+  RUN_TEST(test_get_pawn_psuedo_moves_double);
   return UNITY_END();
 }
