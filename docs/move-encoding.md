@@ -34,7 +34,7 @@ Y - auxillary-y bit
 
 notes:
 * quiet moves do not alter material-- no captures nor promotions
-* even though the following moves are "quiet", for purposes of encoding they have their own flags and will be encoded in a mutally exclisive mannor from pure quiet moves
+* even though the following moves are "quiet", for purposes of encoding they have their own flags and will be encoded in a mutally exclusive mannor from pure quiet moves
   * double pawn push
   * kingside castling
   * queenside castling
