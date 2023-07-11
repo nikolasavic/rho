@@ -2,7 +2,6 @@
 #define MOVE_H
 
 #include <stdbool.h>
-#include "move.h"
 #include "board.h"
 #include "exits.h"
 
