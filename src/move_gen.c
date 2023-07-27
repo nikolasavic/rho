@@ -67,10 +67,8 @@ void get_queen_psuedo_moves(move_list_t * ml, board_t * board,
 
 void get_pawn_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
                            side_t side) {
-  U64 target_bb;
   move_t move = { 0 };
   square_t target;
-  bool capture;
   bool quiet;
 
   U64 moves = pawn_moves[side][origin];
@@ -79,7 +77,6 @@ void get_pawn_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
   print_bitboard(moves);
   while(moves) {
     target = bitscan_fwd(moves);
-    target_bb = square_to_bitboard[target];
     quiet = 1;
     move.target = target;
     move.quiet_move = quiet;
