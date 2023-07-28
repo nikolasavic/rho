@@ -16,3 +16,5 @@
 -nsaw   // no space after while
 
 -nut    // use spaces instead of tabs
+
+-pal    // asterisks in pointer declarations on left

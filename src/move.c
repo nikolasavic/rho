@@ -8,7 +8,7 @@ int x_from_prom[] = { 0, 0, 0, 1, 1 };
 int y_from_prom[] = { 0, 1, 0, 0, 1 };
 int prom_from_xy[] = { N, B, R, Q };
 
-exit_t validate_move(move_t * move, val_opt_t option) {
+exit_t validate_move(move_t* move, val_opt_t option) {
   if(move->origin < A1 || move->origin > H8) {
     if(option == VERBOSE) {
       printf("Error: invalid origin square: %d\n", move->origin);
@@ -48,7 +48,7 @@ exit_t validate_move(move_t * move, val_opt_t option) {
   return SUCCESS;
 }
 
-U16 encode_move(move_t * move) {
+U16 encode_move(move_t* move) {
   U16 result = 0;
   // Encode squares
   result |= square_to_rank[move->origin] << 13;
@@ -89,7 +89,7 @@ U16 encode_move(move_t * move) {
   return result;
 }
 
-exit_t decode_move(move_t * move, U16 encoded) {
+exit_t decode_move(move_t* move, U16 encoded) {
   if(!validate_move(move, SILENT)) {
     return FAIL;
   }
@@ -141,7 +141,7 @@ void print_encoded_move(U16 encoded_move) {
 
 }
 
-void print_move(move_t * move) {
+void print_move(move_t* move) {
   printf("%s->%s prom:%d, capt:%d, quiet:%d double:%d, king:%d, queen:%d\n",
          square_name[move->origin], square_name[move->target],
          move->promotion, move->capture, move->quiet_move,

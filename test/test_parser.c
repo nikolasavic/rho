@@ -21,22 +21,22 @@ void test_side_to_move(void) {
 }
 
 void test_castling_rights(void) {
-  const char *all = "KQkq";     // 001111
-  const char *notBq = "KQk";    // 001110
-  const char *notBk = "KQq";    // 001101
-  const char *white_only = "KQ";        // 001100
-  const char *notWq = "Kkq";    // 001011
-  const char *kings = "Kk";     // 001010
-  const char *bqwk = "Kq";      // 001001
-  const char *white_king = "K"; // 001000
-  const char *notWk = "Qkq";    // 000111
-  const char *wqbk = "Qk";      // 000110
-  const char *queens = "Qq";    // 000101
-  const char *white_queen = "Q";        // 000100
-  const char *black_only = "kq";        // 000011
-  const char *black_king = "k"; // 000010
-  const char *black_queen = "q";        // 000001
-  const char *none = "-";       // 000000
+  const char* all = "KQkq";     // 001111
+  const char* notBq = "KQk";    // 001110
+  const char* notBk = "KQq";    // 001101
+  const char* white_only = "KQ";        // 001100
+  const char* notWq = "Kkq";    // 001011
+  const char* kings = "Kk";     // 001010
+  const char* bqwk = "Kq";      // 001001
+  const char* white_king = "K"; // 001000
+  const char* notWk = "Qkq";    // 000111
+  const char* wqbk = "Qk";      // 000110
+  const char* queens = "Qq";    // 000101
+  const char* white_queen = "Q";        // 000100
+  const char* black_only = "kq";        // 000011
+  const char* black_king = "k"; // 000010
+  const char* black_queen = "q";        // 000001
+  const char* none = "-";       // 000000
 
   TEST_ASSERT_EQUAL_CHAR(0xf, parse_castling_rights(all));
   TEST_ASSERT_EQUAL_CHAR(0xe, parse_castling_rights(notBq));
@@ -197,7 +197,7 @@ void test_parse_piece_char(void) {
 }
 
 void test_parse_square(void) {
-  char *square;
+  char* square;
   square = "a8";
   TEST_ASSERT_EQUAL_INT(A8, parse_square(square));
 

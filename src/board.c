@@ -5,7 +5,7 @@
 
 int piece_identity(int square, board_t * board);
 
-char *square_name[] = {
+char* square_name[] = {
   "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1",
   "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2",
   "a3", "b3", "c3", "d3", "e3", "f3", "g3", "h3",
@@ -105,16 +105,16 @@ U64 square_to_bitboard[64] = {
   9223372036854775808ULL,
 };
 
-char *piece_unicode[] = {
+char* piece_unicode[] = {
   "♙", "♗", "♘", "♖", "♕", "♔",
   "♟︎", "♝", "♞", "♜", "♛", "♚",
 };
 
-char *piece_ascii[] = {
+char* piece_ascii[] = {
   "P", "B", "N", "R", "Q", "K", "p", "b", "n", "r", "q", "k"
 };
 
-void set_occupancy(board_t * b) {
+void set_occupancy(board_t* b) {
   for(int i = 0; i < 6; i++) {
     b->occupancy[WHITE] |= b->pieces[WHITE][i];
     b->occupancy[BLACK] |= b->pieces[BLACK][i];
@@ -122,7 +122,7 @@ void set_occupancy(board_t * b) {
   b->occupancy[BOTH] = b->occupancy[WHITE] | b->occupancy[BLACK];
 }
 
-exit_t validate_board(board_t * board, val_opt_t option) {
+exit_t validate_board(board_t* board, val_opt_t option) {
   if(board->half_move_clock < 0) {
     if(option == VERBOSE) {
       printf("Error: negative half_move_clock: %d\n", board->half_move_clock);
@@ -191,7 +191,7 @@ exit_t validate_board(board_t * board, val_opt_t option) {
   return SUCCESS;
 }
 
-void print_board(board_t * board) {
+void print_board(board_t* board) {
   char side_to_move = board->side_to_move == 0 ? 'w' : 'b';
   int piece_idx;
   printf("\n");
@@ -222,7 +222,7 @@ void print_board(board_t * board) {
   printf("%2d   - Move\n", board->full_move_num);
 }
 
-int piece_identity(int square, board_t * board) {
+int piece_identity(int square, board_t* board) {
   int found = -1;
   for(int side = 0; side < 2; side++) {
     for(int piece = 0; piece < 6; piece++) {
@@ -235,8 +235,8 @@ int piece_identity(int square, board_t * board) {
   return found;
 }
 
-char *decode_castling_rights(int castle_idx) {
-  char *castle_rights[] = {
+char* decode_castling_rights(int castle_idx) {
+  char* castle_rights[] = {
     "-   ", "   q", "  k ", "  kq",
     " Q  ", " Q q", " Qk ", " Qkq",
     "K   ", "K  q", "K k ", "K kq",
@@ -246,7 +246,7 @@ char *decode_castling_rights(int castle_idx) {
   return castle_rights[castle_idx];
 }
 
-void empty_board(board_t * board) {
+void empty_board(board_t* board) {
   memset(board, 0, sizeof(board_t));
   board->side_to_move = NULL_SIDE;
   board->ep_square = NULL_SQ;

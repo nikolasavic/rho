@@ -36,16 +36,18 @@ typedef struct board_s {
   int full_move_num;
 } board_t;
 
-extern char *square_name[];
+extern char* square_name[];
 extern int square_to_rank[];
 extern int square_to_file[];
 extern U64 square_to_bitboard[];
-extern char *piece_unicode[];
-extern char *piece_ascii[];
+extern char* piece_unicode[];
+extern char* piece_ascii[];
 
 void empty_board(board_t *);
 void set_occupancy(board_t *);
 exit_t validate_board(board_t *, val_opt_t);
-char *decode_castling_rights(int);
+char* decode_castling_rights(int);
 
+
+void print_board(board_t * board);
 #endif

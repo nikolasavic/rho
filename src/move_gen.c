@@ -5,7 +5,7 @@
 #include "bitboard.h"
 #include "masks.h"
 
-void add_simple_psuedo_moves(move_list_t * ml, board_t * board,
+void add_simple_psuedo_moves(move_list_t* ml, board_t* board,
                              square_t origin, side_t side, U64 attack_moves) {
   U64 target_bb;
   move_t move = { 0 };
@@ -30,42 +30,42 @@ void add_simple_psuedo_moves(move_list_t * ml, board_t * board,
   }
 }
 
-void get_knight_psuedo_moves(move_list_t * ml, board_t * board,
+void get_knight_psuedo_moves(move_list_t* ml, board_t* board,
                              square_t origin, side_t side) {
   U64 moves = knight_moves[origin];
   moves &= ~(board->occupancy[side]);
   add_simple_psuedo_moves(ml, board, origin, side, moves);
 }
 
-void get_king_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
+void get_king_psuedo_moves(move_list_t* ml, board_t* board, square_t origin,
                            side_t side) {
   U64 moves = king_moves[origin];
   moves &= ~(board->occupancy[side]);
   add_simple_psuedo_moves(ml, board, origin, side, moves);
 }
 
-void get_rook_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
+void get_rook_psuedo_moves(move_list_t* ml, board_t* board, square_t origin,
                            side_t side) {
   U64 moves = rook_attack_mask(origin, board->occupancy[BOTH]);
   moves &= ~(board->occupancy[side]);
   add_simple_psuedo_moves(ml, board, origin, side, moves);
 }
 
-void get_bishop_psuedo_moves(move_list_t * ml, board_t * board,
+void get_bishop_psuedo_moves(move_list_t* ml, board_t* board,
                              square_t origin, side_t side) {
   U64 moves = bishop_attack_mask(origin, board->occupancy[BOTH]);
   moves &= ~(board->occupancy[side]);
   add_simple_psuedo_moves(ml, board, origin, side, moves);
 }
 
-void get_queen_psuedo_moves(move_list_t * ml, board_t * board,
+void get_queen_psuedo_moves(move_list_t* ml, board_t* board,
                             square_t origin, side_t side) {
   U64 moves = queen_attack_mask(origin, board->occupancy[BOTH]);
   moves &= ~(board->occupancy[side]);
   add_simple_psuedo_moves(ml, board, origin, side, moves);
 }
 
-void get_pawn_psuedo_moves(move_list_t * ml, board_t * board, square_t origin,
+void get_pawn_psuedo_moves(move_list_t* ml, board_t* board, square_t origin,
                            side_t side) {
   move_t move = { 0 };
   square_t target;

@@ -13,13 +13,13 @@ side_t parse_side_to_move(const char string) {
     return NULL_SIDE;
 }
 
-castle_t parse_castling_rights(const char *string) {
+castle_t parse_castling_rights(const char* string) {
   int K = 0;
   int Q = 0;
   int k = 0;
   int q = 0;
 
-  const char *str_ptr = string;
+  const char* str_ptr = string;
 
   while(*str_ptr != '\0') {
     if(*str_ptr == 'K')
@@ -55,8 +55,8 @@ void parse_piece_char(U64 bb_arr[2][6], char piece, int square) {
 
 }
 
-int parse_string_int(const char *string) {
-  const char *str_ptr = string;
+int parse_string_int(const char* string) {
+  const char* str_ptr = string;
   int len = 0;
   int result = 0;
   int value = 0;
@@ -80,7 +80,7 @@ int parse_string_int(const char *string) {
   return result;
 }
 
-square_t parse_square(const char *string) {
+square_t parse_square(const char* string) {
   int files[] = {
     ['a'] = 0,['b'] = 1,['c'] = 2,['d'] = 3,
     ['e'] = 4,['f'] = 5,['g'] = 6,['h'] = 7
@@ -102,9 +102,9 @@ int square_order[] = {
   0, 1, 2, 3, 4, 5, 6, 7,
 };
 
-exit_t parse_fen(board_t * board, const char *fen) {
+exit_t parse_fen(board_t* board, const char* fen) {
   empty_board(board);
-  const char *fen_ptr = fen;
+  const char* fen_ptr = fen;
   int square_ptr = 0;
   square_t square = 0;
 
