@@ -2,7 +2,6 @@
 #define MOVE_LIST_H
 
 #include "exits.h"
-#include "move_list.h"
 #include "move.h"
 
 #define MOVE_LIST_CAPACITY 128
