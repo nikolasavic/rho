@@ -74,7 +74,6 @@ void get_pawn_psuedo_moves(move_list_t* ml, board_t* board, square_t origin,
   U64 moves = pawn_moves[side][origin];
   move.origin = origin;
 
-  print_bitboard(moves);
   while(moves) {
     target = bitscan_fwd(moves);
     quiet = 1;
