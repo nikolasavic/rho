@@ -415,6 +415,51 @@ void test_get_pawn_psuedo_moves_double(void) {
   TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move_b));
 }
 
+void test_get_castle_psuedo_moves_no_moves(void) {
+  parse_fen(&board,
+            "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+  set_occupancy(&board);
+  int expected_move_len = 0;
+
+  get_castle_psuedo_moves(&ml, &board, WHITE);
+  TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
+
+  get_castle_psuedo_moves(&ml, &board, BLACK);
+  TEST_ASSERT_EQUAL_INT(expected_move_len, ml.count);
+}
+
+void test_get_castle_psuedo_moves_kingside_moves(void) {
+  parse_fen(&board,
+            "rnbqk2r/pppp1ppp/5n2/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1");
+  set_occupancy(&board);
+
+  //                             s,       t, p, q, d, c, e, k, q
+  move_t expected_move = { NULL_SQ, NULL_SQ, 0, 0, 0, 0, 0, 1, 0 };
+
+  get_castle_psuedo_moves(&ml, &board, WHITE);
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move));
+
+  empty_move_list(&ml);
+  get_castle_psuedo_moves(&ml, &board, BLACK);
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move));
+}
+
+void test_get_castle_psuedo_moves_queenside_moves(void) {
+  parse_fen(&board,
+            "r3kbnr/pp1npppp/2p1q3/3p1b2/3P1B2/2P1Q3/PP1NPPPP/R3KBNR w KQkq - 0 1");
+  set_occupancy(&board);
+
+  //                             s,       t, p, q, d, c, e, k, q
+  move_t expected_move = { NULL_SQ, NULL_SQ, 0, 0, 0, 0, 0, 0, 1 };
+
+  get_castle_psuedo_moves(&ml, &board, WHITE);
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move));
+
+  empty_move_list(&ml);
+  get_castle_psuedo_moves(&ml, &board, BLACK);
+  TEST_ASSERT_EQUAL_INT(true, is_move_in_list(&ml, &expected_move));
+}
+
 int main(void) {
   UNITY_BEGIN();
   RUN_TEST(test_get_knight_psuedo_moves_white);
@@ -434,5 +479,8 @@ int main(void) {
   RUN_TEST(test_get_queen_psuedo_moves_no_moves);
   RUN_TEST(test_get_pawn_psuedo_moves_single);
   RUN_TEST(test_get_pawn_psuedo_moves_double);
+  RUN_TEST(test_get_castle_psuedo_moves_no_moves);
+  RUN_TEST(test_get_castle_psuedo_moves_kingside_moves);
+  RUN_TEST(test_get_castle_psuedo_moves_queenside_moves);
   return UNITY_END();
 }
