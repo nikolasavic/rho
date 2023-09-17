@@ -1,5 +1,5 @@
 all:
-	gcc  -o build/rho src/rho.c src/board.c src/bitboard.c src/masks.c src/init.c
+	gcc  -o build/rho src/rho.c src/board.c src/bitboard.c src/masks.c src/init.c src/parser.c
 
 test_bitboard:
 	mkdir -p build/test
@@ -23,7 +23,7 @@ test_parser:
 
 test_move:
 	mkdir -p build/test
-	gcc test/test_move.c src/move.c src/board.c unity/unity.c -o build/test/test_move
+	gcc test/test_move.c src/move.c src/board.c src/bitboard.c unity/unity.c -o build/test/test_move
 	./build/test/test_move
 
 test_init:
@@ -38,8 +38,13 @@ test_move_list:
 
 test_move_gen:
 	mkdir -p build/test
-	gcc test/helpers.c test/test_move_gen.c src/init.c src/move_gen.c src/move_list.c src/bitboard.c src/masks.c src/board.c src/move.c src/parser.c unity/unity.c -o build/test/test_move_gen
+	gcc test/helpers.c test/test_move_gen.c src/move_gen.c src/init.c src/move_list.c src/bitboard.c src/masks.c src/board.c src/move.c src/parser.c unity/unity.c -o build/test/test_move_gen
 	./build/test/test_move_gen
+
+test_board_analytics:
+	mkdir -p build/test
+	gcc test/test_board_analytics.c src/board_analytics.c src/board.c src/bitboard.c src/masks.c src/init.c src/parser.c unity/unity.c -o build/test/test_board_analytics
+	./build/test/test_board_analytics
 
 clean:
 	rm -rf build/*
