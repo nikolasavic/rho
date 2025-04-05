@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-import sys, subprocess, re
+import re
+import subprocess
+import sys
 
 # Help
 if "-h" in sys.argv or "--help" in sys.argv:
@@ -14,7 +16,7 @@ if "-h" in sys.argv or "--help" in sys.argv:
 
 # Find tests
 test_list = []
-regex = re.compile("^(test_\w+)")
+regex = re.compile(r"^(test_\w+)")
 with open("Makefile", "r") as file:
     for line in file:
         m = regex.match(line)
