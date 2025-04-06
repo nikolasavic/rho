@@ -5,6 +5,55 @@
 #include "bitboard.h"
 #include "masks.h"
 
+void generate_moves(move_list_t* ml, board_t* board, side_t side) {
+  for(square_t sq = A1; sq < NULL_SQ; sq++) {
+    // king
+    if(board->pieces[side][K] & square_to_bitboard[sq]) {
+      if(side == WHITE) {
+        get_king_psuedo_moves(ml, board, sq, WHITE);
+      } else {
+        get_king_psuedo_moves(ml, board, sq, BLACK);
+      }
+    }
+    // knight
+    if(board->pieces[side][N]
+       && board->pieces[side][N] & square_to_bitboard[sq]) {
+      if(side == WHITE) {
+        get_knight_psuedo_moves(ml, board, sq, WHITE);
+      } else {
+        get_knight_psuedo_moves(ml, board, sq, BLACK);
+      }
+    }
+    // queen
+    if(board->pieces[side][Q]
+       && board->pieces[side][Q] & square_to_bitboard[sq]) {
+      if(side == WHITE) {
+        get_queen_psuedo_moves(ml, board, sq, WHITE);
+      } else {
+        get_queen_psuedo_moves(ml, board, sq, BLACK);
+      }
+    }
+    // rook
+    if(board->pieces[side][R]
+       && board->pieces[side][R] & square_to_bitboard[sq]) {
+      if(side == WHITE) {
+        get_rook_psuedo_moves(ml, board, sq, WHITE);
+      } else {
+        get_rook_psuedo_moves(ml, board, sq, BLACK);
+      }
+    }
+    // bishop
+    if(board->pieces[side][B]
+       && board->pieces[side][B] & square_to_bitboard[sq]) {
+      if(side == WHITE) {
+        get_bishop_psuedo_moves(ml, board, sq, WHITE);
+      } else {
+        get_bishop_psuedo_moves(ml, board, sq, BLACK);
+      }
+    }
+  }
+}
+
 void add_simple_psuedo_moves(move_list_t* ml, board_t* board,
                              square_t origin, side_t side, U64 attack_moves) {
   U64 target_bb;
